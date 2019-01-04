@@ -1,0 +1,16 @@
+{
+  "description": "Vehicle Rental",
+  "name": "Vehicle Rental",
+  "type": "project",
+  "homepage": "https://vehicle-rental-develop.herokuapp.com/",
+  "license": "MIT",
+  "support": {
+  },
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "suggest": {
+  },
+  "require-dev": {
+  }
+}
