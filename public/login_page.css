@@ -1,0 +1,55 @@
+body {
+  
+}
+
+#div1{
+	background:#FBEC65;
+	height:135px; 
+	width:100%;
+}
+
+
+#divimg{
+	position: absolute;
+	top: 33px;
+	left:495px;
+}
+
+#logo{
+	float:left;
+	height:60px; 
+	width:60px;
+}
+
+#div2{
+	position: absolute;
+	background:#FBEC65;
+	height:50px; 
+	width:280px;
+	top: 35px;
+	left:565px;
+	color:#000000;
+	font-family:'Passion One';
+	font-size: 40px;
+	text-align: left;
+
+}
+
+#form_login{
+	float:right;
+	height:200px; 
+	width:400px;
+
+}
+#SubmitBtn{
+	margin-left:150px;
+
+}
+
+#SubmitBtn1{
+	background: #1864A0;
+	color: white;
+}
+
+
+
