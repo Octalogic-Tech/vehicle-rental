@@ -20,23 +20,33 @@ class Mycontroller extends CI_Controller {
 	 */
 	public function index()
 	{
-
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->return_vendors();
-		$this->load->view('display_vendor_view',$data);
+		//$this->load->model('Vendor_model');
+		//$data['userArray']=$this->Vendor_model->return_vendors();
+		//$this->load->view('Display_vendor_view',$data);
+		$this->load->view('home');
 			//echo "<pre>";
 			//print_r($data);
 			//echo "</pre>";
 	}
 
 	public function update(){
+		$id=$this->input->post('id');
+		//$id=$this->input->get('id');
+		if($id== NULL)
+		{
+			echo "ID value is NULL";
+		}
+		else
+		{
+			$this->load->model('Vendor_model');
+			$data=$this->Vendor_model->update_status($id);
+			//$data['userArray']=$this->Vendor_model->update_status();
+			print_r($data['status']);
+			//$this->load->view('Display_vendor_view',$data);
 
-	//	$id=$this->input->get('id');
-		//$this->load->view('display_vendor_view');
-		echo "hey";
+			
+		}
 
-	
-	
 	}
 		//$this->load->model
 	

@@ -1,17 +1,14 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>Display Vendor View</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
       table {
                border-collapse: collapse;
                position: absolute;
                top: 100px;
                left: 200px;
-               
-              
             }
 
       table, td, th {
@@ -59,19 +56,36 @@ foreach ($userArray as $value) { ?>
     <td><?php echo $value->longitude;?></td>
     <td><?php echo $value->latitude; ?></td>
     <td><?php echo $value->status; ?></td>
-    <td><a href="<?php echo base_url('/update'); ?>" >Change</a></td>
-
-     
-
-
-  </tr>
-
-   
+    <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button">Change</button></td>
+    <!--<td><a href="<?php// echo base_url('/update'); ?>" >Change</a></td>-->
+  </tr>  
 <?php } ?>
 </table>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('button').click(function(){
+      var id=this.id;
+     
+      $.ajax({
+        method: 'POST',
+        data:{id:id},
+        url:"<?php echo base_url('/update'); ?>",
+        success:function(data){
+          var x='.'+id;
+        $(x).prev().html (data);
+          
+        
+          
+        }
 
+      });
 
+    });
+
+  });
+
+</script>
 </body>
 </html>
 
