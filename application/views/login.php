@@ -15,7 +15,7 @@
 				<img id="logo" src="<?php echo base_url('/public/weblogo.png'); ?>"/>
 			</div>
 			<div id="div2">
-				<span>Vehicle Rental</span>
+				<span>Vehicle Rental 2</span>
 			</div>
 		</div>
 
