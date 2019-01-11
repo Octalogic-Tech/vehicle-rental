@@ -2,13 +2,14 @@
 <html>
 <head>
 <title>Display Vendor View</title>
+<?php $this->view('admin/style'); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
       table {
                border-collapse: collapse;
-               position: absolute;
+               position: relative;
                top: 100px;
-               left: 200px;
+               left: 0px;
             }
 
       table, td, th {
@@ -17,14 +18,13 @@
                padding: 2px;
                    }
   </style>
-
 </head>
-<body>
 
-  
-
-
-<table>
+  <body class="hold-transition skin-blue sidebar-mini">
+  <?php $this->view('admin/header'); ?>
+  <?php $this->view('admin/sidebar'); ?>
+  <div class="content-wrapper">
+<table class="table table-hover">
 <tr>
    <th>ID</th>
    <th>ID LOGIN</th>
@@ -61,6 +61,9 @@ foreach ($userArray as $value) { ?>
   </tr>  
 <?php } ?>
 </table>
+</div>
+
+<?php $this->view('admin/footer'); ?>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -87,5 +90,6 @@ foreach ($userArray as $value) { ?>
 
 </script>
 </body>
+  <?php $this->view('admin/script'); ?>
 </html>
 

@@ -1,0 +1,31 @@
+.skin-blue .main-header .logo {
+    background-color: #FBEC65 ;
+    color: #000000;   
+}
+
+
+.skin-blue .main-header .logo:hover {
+  background-color: #dfc907;
+}
+
+
+.skin-blue .main-header .navbar {
+    background-color: #fcf29c;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #dfc907;
+}
+
+.main-header .sidebar-toggle:before {
+    content: "\f0c9";
+    color: #000000;
+}
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+    background-color: #5E5A56;
+}
+
+.skin-blue .sidebar-menu>li.header {
+    color: #fff;
+    background: #757575;
+}

@@ -20,10 +20,12 @@ class Mycontroller extends CI_Controller {
 	 */
 	public function index()
 	{
-		//$this->load->model('Vendor_model');
-		//$data['userArray']=$this->Vendor_model->return_vendors();
-		//$this->load->view('Display_vendor_view',$data);
-		$this->load->view('home');
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->return_vendors();
+		$this->load->view('admin/Display_vendor_view',$data);
+		//$data['page_title'] = 'your page title'; //will be available as $page_title in view
+
+		//$this->load->view('admin/adminhome');
 			//echo "<pre>";
 			//print_r($data);
 			//echo "</pre>";
