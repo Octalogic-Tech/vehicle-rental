@@ -52,6 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['default_controller'] = 'mycontroller';
 $route['default_controller'] = 'Mycontroller/index';
 $route['update'] = 'Mycontroller/update';
+$route['Launch_add_brand_view']= 'Mycontroller/Launch_add_brand_view';
+$route['form_validation/[:any]']='Mycontroller/form_validation/';
 $route['update/(:num)'] = 'Mycontroller/update/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

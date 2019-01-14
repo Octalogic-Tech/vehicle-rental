@@ -20,11 +20,11 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="public/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 
-   <link rel="stylesheet" href="public/dist/css/custom/custom.css">
+ 
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-
+  <link rel="stylesheet" href="public/dist/css/custom/custom.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

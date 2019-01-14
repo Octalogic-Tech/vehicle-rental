@@ -14,27 +14,27 @@
 
 			$this->load->database();
 
-			$this->db->select("status");
+			$this->db->select("activeStatus");
 			$this->db->where('id', $id);
 			$query=$this->db->get("vendors");
 
 			$data=$query->row_array();
 
-			if($data['status']==0){
+			if($data['activeStatus']==0){
 				$this->db->get("vendors");
 				$this->db->where('id', $id);
-				$this->db->set('status', 1);
+				$this->db->set('activeStatus', 1);
 				$this->db->update('vendors');
 			}
-			if($data['status']==1){
+			if($data['activeStatus']==1){
 				$this->db->get("vendors");
 				$this->db->where('id', $id);
-				$this->db->set('status', 0);
+				$this->db->set('activeStatus', 0);
 				$this->db->update('vendors');
 			}
 
 
-			$this->db->select("status");
+			$this->db->select("activeStatus");
 			$this->db->where('id', $id);
 			$query=$this->db->get("vendors");
 			
@@ -48,7 +48,15 @@
 
 
 		}
+
+		function insert_branddata($data){
+				$this->load->database();
+				$this->db->insert("vehiclebrands",$data);
+
+
+
 	}
+}
 
 
 ?>

@@ -22,10 +22,10 @@ class Mycontroller extends CI_Controller {
 	{
 		$this->load->model('Vendor_model');
 		$data['userArray']=$this->Vendor_model->return_vendors();
-		$this->load->view('admin/Display_vendor_view',$data);
+		$this->load->view('admin/admin_vendor_view',$data);
 		//$data['page_title'] = 'your page title'; //will be available as $page_title in view
 
-		//$this->load->view('admin/adminhome');
+		//$this->load->view('admin/Admin_home');
 			//echo "<pre>";
 			//print_r($data);
 			//echo "</pre>";
@@ -48,6 +48,34 @@ class Mycontroller extends CI_Controller {
 
 			
 		}
+
+	}
+
+	public function Launch_add_brand_view(){
+		$this->load->view('admin/Admin_addbrand_view');
+
+	}
+
+
+	public function insert_brand(){
+
+		$this->load->helper('url');
+		/*$this->load->library('form_validation');
+		$this->form_validation->set_rules("brandname","Brand Name", 'required|alpha');
+
+		if($this->form_validation->run())
+		{
+			$this->load->model("main_model");
+		}*/
+
+		 $data = array(  
+                        'name'     => $this->input->post('brandname'),  
+                        );  
+
+		 $this->load->model('Vendor_model');
+		 $this->Vendor_model->insert_branddata($data);
+  
+        redirect('Mycontroller/Launch_add_brand_view');  
 
 	}
 		//$this->load->model

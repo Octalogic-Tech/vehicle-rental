@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>	
-	<?php $this->view('admin/style'); ?>
+	<?php $this->view('admin/Admin_style'); ?>
 <title></title>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-	<?php $this->view('admin/header'); ?>
-	<?php $this->view('admin/sidebar'); ?>
+	<?php $this->view('admin/Admin_header'); ?>
+	<?php $this->view('admin/Admin_sidebar'); ?>
 
 	<div class="content-wrapper">
     	<section class="content-header">
@@ -22,11 +22,11 @@
     	</section>
   </div>
 
-	<?php $this->view('admin/footer'); ?>
+	<?php $this->view('admin/Admin_footer'); ?>
 
 </body>
 
-	<?php $this->view('admin/script'); ?>
+	<?php $this->view('admin/Admin_script'); ?>
 
 </html>
 
