@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mycontroller extends CI_Controller {
+class Admincontroller extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -43,7 +43,7 @@ class Mycontroller extends CI_Controller {
 			$this->load->model('Vendor_model');
 			$data=$this->Vendor_model->update_status($id);
 			//$data['userArray']=$this->Vendor_model->update_status();
-			print_r($data['status']);
+			print_r($data['activeStatus']);
 			//$this->load->view('Display_vendor_view',$data);
 
 			
@@ -69,18 +69,41 @@ class Mycontroller extends CI_Controller {
 		}*/
 
 		 $data = array(  
-                        'name'     => $this->input->post('brandname'),  
+                       'name'     => $this->input->post('brandname'),  
                         );  
 
 		 $this->load->model('Vendor_model');
 		 $this->Vendor_model->insert_branddata($data);
+		 echo $data['name'];
   
-        redirect('Mycontroller/Launch_add_brand_view');  
+       // redirect('Mycontroller/Launch_add_brand_view');  
 
 	}
+
+
 		//$this->load->model
 	
 		//$this->load->model(Vendor_model);
 	
+	public function Display_vehiclebrand(){
+
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_vehiclebrands();
+		$this->load->view('admin/Admin_addbrand_view',$data);
+
+	}
+
+	public function Change_brandstatus(){
+		$id=$this->input->post('id');
+
+			$this->load->model('Vendor_model');
+			$data=$this->Vendor_model->Update_brandstatus($id);
+			//$data['userArray']=$this->Vendor_model->update_status();
+			print_r($data['status']);
+		
+
+	}
+
+
 
 }
