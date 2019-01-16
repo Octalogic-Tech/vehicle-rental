@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-//$route['default_controller'] = 'mycontroller';
-$route['default_controller'] = 'Mycontroller/index';
+$route['default_controller'] = 'mycontroller';
+$route['customer_vehicles_list'] = 'Vrapicontroller/customer_vehicles_list';
 $route['update'] = 'Mycontroller/update';
 $route['Launch_add_brand_view']= 'Mycontroller/Launch_add_brand_view';
 $route['form_validation/[:any]']='Mycontroller/form_validation/';
