@@ -49,11 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'mycontroller';
+//$route['default_controller'] = 'mycontroller';
+$route['default_controller'] = 'Admincontroller/index';
+$route['update'] = 'Admincontroller/update';
+$route['insert_brand'] = 'Admincontroller/insert_brand';
+$route['Change_brandstatus'] = 'Admincontroller/Change_brandstatus';
+$route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
+$route['form_validation/[:any]']='Admincontroller/form_validation/';
+$route['update/(:num)'] = 'Admincontroller/update/$1';
+$route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
+//$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 $route['customer_vehicles_list'] = 'Vrapicontroller/customer_vehicles_list';
-$route['update'] = 'Mycontroller/update';
-$route['Launch_add_brand_view']= 'Mycontroller/Launch_add_brand_view';
-$route['form_validation/[:any]']='Mycontroller/form_validation/';
-$route['update/(:num)'] = 'Mycontroller/update/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

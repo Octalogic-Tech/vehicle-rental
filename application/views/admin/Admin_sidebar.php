@@ -47,7 +47,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('/Launch_add_brand_view'); ?>"><i class="fa fa-circle-o"></i> Vehicle Brands</a></li>
+            <li><a href="<?php echo base_url('/Display_vehiclebrand'); ?>"><i class="fa fa-circle-o"></i> Vehicle Brands</a></li>
             <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Vehicle Type </a></li>
             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Vehicle Categories</a></li>
             <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Vehicle Name</a></li>
