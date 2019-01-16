@@ -21,7 +21,7 @@
 			$this->db->where('vendors.activeStatus',1);
 			$this->db->where('vehiclebrands.status',1);
 
-			$this->db->order('vehiclesrent.id');
+			$this->db->order_by('vehiclesrent.id','asc');
 
 			$query=$this->db->get();
 			return $query->result();
