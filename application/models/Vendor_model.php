@@ -52,6 +52,12 @@
 	function insert_branddata($data){
 		$this->load->database();
 		$this->db->insert("vehiclebrands",$data);
+	//	$query=$this->db->get("vehiclebrands");
+		//$query = $this->db->query("SELECT * FROM vehiclebrands;");
+		//$row = $query->last_row(‘array’);
+		 $insert_id = $this->db->insert_id();
+
+		return $insert_id;
 	}
 
 	function get_vehiclebrands(){
