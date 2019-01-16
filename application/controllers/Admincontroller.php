@@ -113,6 +113,20 @@ class Admincontroller extends CI_Controller {
 			print_r($data['status']);
 	}
 
+	public function Change_brandname(){
+
+
+		$this->load->helper('url');
+
+		 $data = array('id'=>  $this->input->post('hid'),
+                       'name'     => $this->input->post('brandname'),  
+                        );
+		 $this->load->model('Vendor_model');
+		 $insert_id=$this->Vendor_model->Update_brandname($data);
+		//echo "hey";
+
+	}
+
 
 
 }

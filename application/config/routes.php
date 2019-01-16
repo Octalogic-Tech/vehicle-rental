@@ -53,6 +53,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Admincontroller/index';
 $route['update'] = 'Admincontroller/update';
 $route['insert_brand'] = 'Admincontroller/insert_brand';
+$route['Change_brandname'] = 'Admincontroller/Change_brandname';
+
 $route['Change_brandstatus'] = 'Admincontroller/Change_brandstatus';
 $route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
 $route['form_validation/[:any]']='Admincontroller/form_validation/';

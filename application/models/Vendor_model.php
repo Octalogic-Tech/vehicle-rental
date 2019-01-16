@@ -108,6 +108,15 @@
 
 
 		}
+
+
+		function Update_brandname($data){
+			$this->load->database();
+			$this->db->replace('vehiclebrands', $data);
+
+
+		}
+
 }
 
 
