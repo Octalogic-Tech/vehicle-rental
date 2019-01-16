@@ -1,0 +1,83 @@
+.skin-blue .main-header .logo {
+    background-color: #FBEC65 ;
+    color: #000000;   
+}
+
+
+.skin-blue .main-header .logo:hover {
+  background-color: #dfc907;
+}
+
+
+.skin-blue .main-header .navbar {
+    background-color: #fcf29c;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #dfc907;
+}
+
+.main-header .sidebar-toggle:before {
+    content: "\f0c9";
+    color: #000000;
+}
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+    background-color: #5E5A56;
+}
+
+.skin-blue .sidebar-menu>li.header {
+    color: #fff;
+    background: #757575;
+}
+
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.main-sidebar{
+    min-height: 100% !important;
+}
+
+
+
+
