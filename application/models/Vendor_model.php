@@ -111,8 +111,24 @@
 
 
 		function Update_brandname($data){
+			//echo $name;
 			$this->load->database();
-			$this->db->replace('vehiclebrands', $data);
+			$this->db->get("vehiclebrands");
+			$this->db->where('id', $data['id']);
+			$this->db->set('name', $data['name']);
+   			$this->db->update('vehiclebrands');
+
+
+   			$this->db->select("*");
+			$this->db->where('id', $data['id']);
+			$query=$this->db->get("vehiclebrands");
+			
+			//$query->result();		
+			//$query=$this->db->get("vendors");
+			//print_r($query->result());
+
+			return $query->row_array();
+
 
 
 		}

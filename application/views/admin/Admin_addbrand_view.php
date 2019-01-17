@@ -8,6 +8,7 @@
     <?php $this->view('admin/Admin_style'); ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <title>Admin Add Brand</title>
+     <?php $this->view('admin/Admin_script'); ?>
   </head>
 
   <body class="hold-transition skin-blue sidebar-mini">
@@ -24,7 +25,7 @@
       </section>
       <section class="content">
 
-         <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Add Brand</button>
+         <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Brand</button>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -45,7 +46,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -65,13 +66,14 @@
           <form id="Upbrand" class="form-inline">
             <input type="hidden" id="id" placeholder="id" name="id">
             <label for="brandname">Brand Name:</label>
-            <input type="text" id="brandname" placeholder="Enter New Brand Name" name="brandname">
+            <input type="text" id="brandname1" placeholder="Enter New Brand Name" name="brandname">
             <?php echo form_error("brandname"); ?>
+          
             <button type="submit" >UPDATE</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -128,6 +130,14 @@
       
   }
 
+
+  function Launch_insertmodal(){
+
+
+             $(".modal-body #brandname").val(null);
+            
+          }
+
   function Launch_updatemodal(id){
 
 
@@ -136,10 +146,14 @@
             //var nam1=$('#id').text();
             //$(".modal-body #brandname").val( id );
             $(".modal-body #id").val( id );
-            $(".modal-body #brandname").val( nam );
+            $(".modal-body #brandname1").val( nam );
          // $('#addBookDialog').modal('show');
             
           }
+          function toggleAlert(){
+    $(".alert").toggleClass('in out'); 
+    return false; // Keep close.bs.alert event from removing from DOM
+}
 
 
       
@@ -147,9 +161,11 @@
 
   $(document).ready(function(){
 
+  //  $('#tablebrand').DataTable();
+
     $("#addbrand").submit(function(){
       var brandname = $('#brandname').val();
-      alert(brandname);
+      //alert(brandname);
        $.ajax({
           method:'POST',
           data:{'brandname':brandname},
@@ -157,12 +173,13 @@
           success:function(data){
             
            // $(x).prev().html (data);
+           $("#myModal").modal("toggle");
             var obj=JSON.parse(data);
-            alert(obj.name);
+            alert("Brand Name: "+obj.name+ ". Added Successfully");
             var idr="t"+obj.id;
             var idi="id"+obj.id;
             var idn="n"+obj.id;
-            var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Update</buttton></td></tr>';
+            var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton></td></tr>';
 
              $('#tablebrand tbody').append(markup);
            
@@ -174,28 +191,27 @@
        return false;
     }); 
 
-$("#Upbrand").submit(function(){
+
+//-------------------------------------- UPDATE BRAND------------------------------->
+
+$("#Upbrand").submit(function(){ 
       var id=$('#id').val();
-      var brandname = $('#brandname').val();
-      alert(haha);
+      var brandname = $('#brandname1').val();
+    //  alert(haha);
        $.ajax({
           method:'POST',
           data:{'id':id,'brandname':brandname},
           url:"<?php echo base_url('/Change_brandname'); ?>",
           success:function(data){
-            alert(data);
+            var obj=JSON.parse(data);
+            $("#myModal2").modal("toggle");
+            alert("Update Successful");
+            var idn="#n"+obj.id;
+            var n=obj.name;
+            $(idn).html(n);
+            toggleAlert("Update Successful");
+            //alert(data);
             
-           // $(x).prev().html (data);
-          /*  var obj=JSON.parse(data);
-            alert(obj.name);
-            var idr="t"+obj.id;
-            var idi="id"+obj.id;
-            var idn="n"+obj.id;
-            var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Update</buttton></td></tr>';
-
-             $('#tablebrand tbody').append(markup);*/
-           
-
           }
         });
 
@@ -209,7 +225,6 @@ $("#Upbrand").submit(function(){
 
 
 
-//-------------------------------------- UPDATE BRAND------------------------------->
 
 
 

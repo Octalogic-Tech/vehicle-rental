@@ -60,6 +60,7 @@ $route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
 $route['form_validation/[:any]']='Admincontroller/form_validation/';
 $route['update/(:num)'] = 'Admincontroller/update/$1';
 $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
+//$route['Change_brandname/(:any)'] = 'Admincontroller/Change_brandname/';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 
 $route['404_override'] = '';

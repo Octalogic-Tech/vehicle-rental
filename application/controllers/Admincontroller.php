@@ -117,13 +117,21 @@ class Admincontroller extends CI_Controller {
 
 
 		$this->load->helper('url');
+		//$id= $this->input->post('id');
+	
+		//$name =$this->input->post('brandname');
+		$data = array(
 
-		 $data = array('id'=>  $this->input->post('hid'),
-                       'name'     => $this->input->post('brandname'),  
+						'id'	=>	$this->input->post('id'),
+                      	'name'     => $this->input->post('brandname'),  
                         );
-		 $this->load->model('Vendor_model');
-		 $insert_id=$this->Vendor_model->Update_brandname($data);
-		//echo "hey";
+
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Update_brandname($data);
+		//echo $data['name'];
+		 $myJSON=json_encode($array);
+		 echo $myJSON;
 
 	}
 
