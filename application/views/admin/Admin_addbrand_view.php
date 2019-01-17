@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>  
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
      <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin Add Brand</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <?php $this->view('admin/Admin_style'); ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <title>Admin Add Brand</title>
@@ -81,13 +84,16 @@
   </div>
 
         <table id="tablebrand" class="table table-hover">
+          <thead>
         <tr>
-         <th>ID</th>
-         <th>BRAND NAME</th>
-         <th>DELETE</th>
-         <th>UPDATE</th>
+         <th id="id"  >ID</th>
+         <th  id="brand_name" >BRAND NAME</th>
+         <th id="delete" >DELETE</th>
+         <th id="update" >UPDATE</th>
         <!-- <th>STATUS</th>-->
         </tr>
+      </thead>
+      <tbody>
         <?php
         foreach ($userArray as $value) { ?>
          <tr id="<?php echo "t";echo $value->id; ?>">
@@ -95,13 +101,14 @@
 
             <td id="<?php echo "n";echo $value->id; ?>"><?php echo $value->name; ?></td>
 
-            <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-danger" onclick="Deletebrand('<?php echo $value->id; ?>')">Delete</button></td>
+            <td  class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-danger" onclick="Deletebrand('<?php echo $value->id; ?>')">Delete</button></td>
 
-            <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('<?php echo $value->id; ?>')">Update</button></td>
+            <td " class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('<?php echo $value->id; ?>')">Update</button></td>
          <!-- <td><?php //echo $value->status; ?></td>--> 
           <!--<td><a href="<?php// echo base_url('/update'); ?>" >Change</a></td>-->
         </tr>  
         <?php } ?>
+      </tbody>
         </table>
 
         </section>
@@ -161,7 +168,7 @@
 
   $(document).ready(function(){
 
-  //  $('#tablebrand').DataTable();
+   $('#tablebrand').DataTable();
 
     $("#addbrand").submit(function(){
       var brandname = $('#brandname').val();
@@ -173,22 +180,32 @@
           success:function(data){
             
            // $(x).prev().html (data);
-           $("#myModal").modal("toggle");
+          // $("#myModal").modal("hide");
             var obj=JSON.parse(data);
-            alert("Brand Name: "+obj.name+ ". Added Successfully");
-            var idr="t"+obj.id;
+           alert("Brand Name: "+obj.name+ ". Added Successfully");
+           /*var idr="t"+obj.id;
             var idi="id"+obj.id;
             var idn="n"+obj.id;
             var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton></td></tr>';
 
-             $('#tablebrand tbody').append(markup);
-           
+             $('#tablebrand tbody').append(markup);*/
+             var iq=obj.id;
+             var table1 = $('#tablebrand').DataTable();
+ 
+/*table1.row.add( {
+        "id":       "T",
+        "brand_name":   "System Architect",
+        "delete":     "$3,120",
+        "update": "2011/04/25",
+    } ).draw();*/
+         table1.row.add(['asdsa34id', 'asdsa34id', 'asdsa34id', 'asdsa34id']);
+ 
 
           }
         });
 
 
-       return false;
+      return false;
     }); 
 
 
