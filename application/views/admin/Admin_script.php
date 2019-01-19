@@ -35,5 +35,12 @@
 <script src="public/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="public/dist/js/demo.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<!--<script src="https://cdn.datatables.net/rowreorder/1.2.5/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js
+"></script>-->
+
+<!--<script src="public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>-->
 

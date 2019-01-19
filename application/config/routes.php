@@ -53,13 +53,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Admincontroller/index';
 $route['update'] = 'Admincontroller/update';
 $route['insert_brand'] = 'Admincontroller/insert_brand';
+$route['Insert_category'] = 'Admincontroller/Insert_category';
 $route['Change_brandname'] = 'Admincontroller/Change_brandname';
+$route['Change_category'] = 'Admincontroller/Change_category';
 
 $route['Change_brandstatus'] = 'Admincontroller/Change_brandstatus';
+$route['Change_categorystatus'] = 'Admincontroller/Change_categorystatus';
+
 $route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
+$route['Display_vehiclecategory']= 'Admincontroller/Display_vehiclecategory';
+
 $route['form_validation/[:any]']='Admincontroller/form_validation/';
+
 $route['update/(:num)'] = 'Admincontroller/update/$1';
 $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
+$route['Change_categorystatus/(:num)'] = 'Admincontroller/Change_categorystatus/$1';
 //$route['Change_brandname/(:any)'] = 'Admincontroller/Change_brandname/';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 

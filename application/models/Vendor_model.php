@@ -132,6 +132,74 @@
 
 
 		}
+/*----------------------------------------CATEGORY-----------------------------------------*/
+		function get_vehiclecategory(){
+
+			$this->load->database();
+			$query = $this->db->get_where('vehiclecategories', array('status' => '1'));
+			return $query->result();
+		}
+	
+
+
+		function insert_categorydata($data){
+
+			$this->load->database();
+			$this->db->insert("vehiclecategories",$data);;
+			$insert_id = $this->db->insert_id();
+
+			return $insert_id;
+		}
+
+		
+
+		function Update_category($data){
+
+			$this->load->database();
+			$this->db->get("vehiclecategories");
+			$this->db->where('id', $data['id']);
+			$this->db->set('name', $data['name']);
+   			$this->db->update('vehiclecategories');
+
+   			$this->db->select("*");
+			$this->db->where('id', $data['id']);
+			$query=$this->db->get("vehiclecategories");
+			
+			return $query->row_array();
+
+
+
+		}
+
+
+		function Update_categorystatus($id){
+
+			$this->load->database();
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("vehiclecategories");
+			$data=$query->row_array();
+
+			if($data['status']==0){
+				$this->db->get("vehiclecategories");
+				$this->db->where('id', $id);
+				$this->db->set('status', 1);
+				$this->db->update('vehiclecategories');
+			}
+			if($data['status']==1){
+				$this->db->get("vehiclecategories");
+				$this->db->where('id', $id);
+				$this->db->set('status', 0);
+				$this->db->update('vehiclecategories');
+			}
+
+
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("vehiclecategories");
+
+			return $query->row_array();
+		}
 
 }
 

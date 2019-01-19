@@ -105,6 +105,8 @@ class Admincontroller extends CI_Controller {
 
 	}
 
+	
+
 	public function Change_brandstatus(){
 			$id=$this->input->post('id');
 			$this->load->model('Vendor_model');
@@ -134,6 +136,59 @@ class Admincontroller extends CI_Controller {
 		 echo $myJSON;
 
 	}
+
+
+/*--------------------------------------Category------------------------------------*/
+
+	public function Display_vehiclecategory(){
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_vehiclecategory();
+		$this->load->view('admin/Admin_addcategory_view',$data);
+
+	}
+
+
+	public function Insert_category(){
+
+		$this->load->helper('url');
+		$data = array(  
+                       'name'     => $this->input->post('category'),  
+                     );  
+		$this->load->model('Vendor_model');
+		$insert_id=$this->Vendor_model->insert_categorydata($data);
+		$array = $this->array_push_assoc($data, 'id', $insert_id);
+		$myJSON=json_encode($array);
+		echo $myJSON;
+	}
+
+	
+
+	public function Change_category(){
+		$this->load->helper('url');
+		$data = array(
+
+						'id'	=>	$this->input->post('id'),
+                      	'name'     => $this->input->post('category'),  
+                        );
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Update_category($data);
+		$myJSON=json_encode($array);
+		echo $myJSON;
+
+	}
+
+	
+
+	public function Change_categorystatus(){
+		$id=$this->input->post('id');
+		$this->load->model('Vendor_model');
+		$data=$this->Vendor_model->Update_categorystatus($id);
+		print_r($data['status']);
+	}
+
+
+
 
 
 

@@ -11,7 +11,7 @@
 
     <?php $this->view('admin/Admin_style'); ?>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <title>Admin Add Brand</title>
+        <title>Admin Add Category</title>
 
 
 </head>
@@ -24,13 +24,13 @@
 
                     <section class="content-header">
                         <h1>
-          Brand Details
+          Category Details
           <small>Control panel</small>
         </h1>
                     </section>
                     <section class="content">
 
-                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Brand</button>
+                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Category</button>
                         <br><br>
 
                         <!-- Modal -->
@@ -41,13 +41,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">ADD BRAND</h4>
+                                        <h4 class="modal-title">ADD CATEGORY</h4>
                                     </div>
 
                                     <div class="modal-body">
-                                        <form id="addbrand" class="form-inline">
-                                            <label for="brandname">Brand Name:</label>
-                                            <input type="text" id="brandname" placeholder="Enter Brand Name" name="brandname">
+                                        <form id="addcategory" class="form-inline">
+                                            <label for="Category">Category:</label>
+                                            <input type="text" id="category" placeholder="Enter Category" name="category">
                                             <?php echo form_error("brandname"); ?>
                                                 <button type="submit">ADD</button>
                                         </form>
@@ -67,13 +67,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">UPDATE BRAND</h4>
+                                        <h4 class="modal-title">UPDATE CATEGORY</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="Upbrand" class="form-inline">
+                                        <form id="Upcategory" class="form-inline">
                                             <input type="hidden" id="id" placeholder="id" name="id">
-                                            <label for="brandname">Brand Name:</label>
-                                            <input type="text" id="brandname1" placeholder="Enter New Brand Name" name="brandname">
+                                            <label for="category1">Brand Name:</label>
+                                            <input type="text" id="category1" placeholder="Enter New Category" name="category1">
                                           
                                                 <button type="submit">UPDATE</button>
                                         </form>
@@ -92,7 +92,7 @@
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
-                                    <th id="brand_name">BRAND NAME</th>
+                                    <th id="category">CATEGORY</th>
                                     <th id="delete">DELETE</th>
                                     <th id="update">UPDATE</th>
                                     <!-- <th>STATUS</th>-->
@@ -141,13 +141,13 @@
             data: {
                 id: id
             },
-            url: "<?php echo base_url('/Change_brandstatus'); ?>",
+            url: "<?php echo base_url('/Change_categorystatus'); ?>",
             success: function(data) {
                 var x = "#t" + id;
                 // $(x).prev().html (data);
                 alert(id);
                 alert("Delete Successful");
-                //$(x).remove();
+            //    $(x).remove();
                 // var i="button#"+id;
                 // alert(i);
                 // var table1 = $('#tablebrand').DataTable();
@@ -159,12 +159,14 @@
                 //                 .remove()
                 //                 .draw();
                 // });
-var table = $('#tablebrand').DataTable();
+                var table = $('#tablebrand').DataTable();
                 table
         .row( $(x))
         .remove()
         .draw();
 
+         }
+                    
          }
         });
 
@@ -172,7 +174,7 @@ var table = $('#tablebrand').DataTable();
 
     function Launch_insertmodal() {
 
-        $(".modal-body #brandname").val(null);
+        $(".modal-body #category").val(null);
 
     }
 
@@ -200,7 +202,7 @@ var table = $('#tablebrand').DataTable();
         //var nam1=$('#id').text();
         //$(".modal-body #brandname").val( id );
         $(".modal-body #id").val(id);
-        $(".modal-body #brandname1").val(nam);
+        $(".modal-body #category1").val(nam);
         // $('#addBookDialog').modal('show');
 
     }
@@ -219,21 +221,21 @@ var table = $('#tablebrand').DataTable();
           
  
 
-        $("#addbrand").submit(function() {
-            var brandname = $('#brandname').val();
+        $("#addcategory").submit(function() {
+            var category = $('#category').val();
             //alert(brandname);
             $.ajax({
                 method: 'POST',
                 data: {
-                    'brandname': brandname
+                    'category': category
                 },
-                url: "<?php echo base_url('/insert_brand'); ?>",
+                url: "<?php echo base_url('/Insert_category'); ?>",
                 success: function(data) {
 
                     // $(x).prev().html (data);
                     $("#myModal").modal("toggle");
                     var obj = JSON.parse(data);
-                    alert("Brand Name: " + obj.name + ". Added Successfully");
+                    alert("Category: " + obj.name + ". Added Successfully");
                     /*var idr="t"+obj.id;
                      var idi="id"+obj.id;
                      var idn="n"+obj.id;
@@ -265,17 +267,17 @@ var table = $('#tablebrand').DataTable();
 
         //-------------------------------------- UPDATE BRAND------------------------------->
 
-        $("#Upbrand").submit(function() {
+        $("#Upcategory").submit(function() {
             var id = $('#id').val();
-            var brandname = $('#brandname1').val();
+            var category = $('#category1').val();
             //  alert(haha);
             $.ajax({
                 method: 'POST',
                 data: {
                     'id': id,
-                    'brandname': brandname
+                    'category': category
                 },
-                url: "<?php echo base_url('/Change_brandname'); ?>",
+                url: "<?php echo base_url('/Change_category'); ?>",
                 success: function(data) {
                     var obj = JSON.parse(data);
                     $("#myModal2").modal("toggle");
