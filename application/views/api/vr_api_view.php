@@ -1,6 +1,11 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-		echo($json);
 
+		//......Printing Api Info
+		echo '<pre>';
+		echo($json);
+		echo "</pre>";
+
+	
 ?>
