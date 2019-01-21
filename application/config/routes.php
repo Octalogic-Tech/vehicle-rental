@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 //$route['default_controller'] = 'mycontroller';
+
+/*............................................. Admin routes .............................................*/
 $route['default_controller'] = 'Admincontroller/index';
 $route['update'] = 'Admincontroller/update';
 $route['insert_brand'] = 'Admincontroller/insert_brand';
@@ -59,7 +61,9 @@ $route['form_validation/[:any]']='Admincontroller/form_validation/';
 $route['update/(:num)'] = 'Admincontroller/update/$1';
 $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
-$route['customer_vehicles_list'] = 'Vrapicontroller/customer_vehicles_list';
+
+/*............................................. API routes .............................................*/
+$route['customer/vehicles/list'] = 'Vrapicontroller/customer_vehicles_list';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
