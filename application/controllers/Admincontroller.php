@@ -189,6 +189,74 @@ class Admincontroller extends CI_Controller {
 
 
 
+	/*--------------------------------------Type------------------------------------*/
+
+	public function Display_vehicletype(){
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_vehicletype();
+		$data['catArray']=$this->Vendor_model->get_activecategory();
+		$this->load->view('admin/Admin_addtype_view',$data);
+
+	}
+
+
+	public function Insert_type(){
+
+		$this->load->helper('url');
+		$data = array( 'id_vehicleCategories'     => $this->input->post('categoryid'),
+                       'type'     => $this->input->post('type'),
+
+
+                     );  
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->insert_typedata($data);
+		//print_r($array);
+		//$array = $this->array_push_assoc($data, 'id', $insert_id);
+		//$myJSON=json_encode($array);
+		//echo $myJSON;
+		$myJSON=json_encode($array);
+		echo $myJSON;
+		//echo $array;
+	}
+
+	public function Change_type(){
+		$this->load->helper('url');
+		$data = array(
+
+						'id'	=>	$this->input->post('id'),
+                      	'type'     => $this->input->post('type'),  
+                        );
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Update_type($data);
+		$myJSON=json_encode($array);
+		echo $myJSON;
+
+	}
+
+	public function Change_typestatus(){
+		$id=$this->input->post('id');
+		$this->load->model('Vendor_model');
+		$data=$this->Vendor_model->Update_typestatus($id);
+		print_r($data['status']);
+	}
+
+
+
+	/*-------------------------------NAME-----------------------------------*/
+
+	public function Display_vehiclename(){
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_vehiclename();
+		//$data['catArray']=$this->Vendor_model->get_activecategory();
+		$this->load->view('admin/Admin_addtype_view',$data);
+
+	}
+
+
+
+
+
 
 
 

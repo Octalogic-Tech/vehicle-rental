@@ -201,6 +201,105 @@
 			return $query->row_array();
 		}
 
+
+/*************************************VEHICLE Type****************************************/
+
+		function get_vehicletype(){
+
+				$this->load->database();
+				$this->db->select("vt.id, vc.name AS category_name, vt.type");
+				$this->db->from("vehicletypes vt");
+				$this->db->join("vehiclecategories vc","vc.id=vt.id_vehicleCategories","LEFT");
+				$this->db->where("vt.status",1);
+				$query=$this->db->get();
+				return $query->result();
+					
+			}
+
+
+
+		function get_activecategory(){
+				$this->load->database();
+				$this->db->select("vc.id, vc.name AS category_name");
+				$this->db->from("vehiclecategories vc");
+				$this->db->where("vc.status",1);
+				$query=$this->db->get();
+				return $query->result();
+
+		
+		}
+
+		function insert_typedata($data){
+
+			$this->load->database();
+			$this->db->insert("vehicletypes",$data);;
+			$insert_id = $this->db->insert_id();
+
+			$this->db->select("vt.id, vc.name AS category_name, vt.type");
+			$this->db->from("vehicletypes vt");
+			$this->db->join("vehiclecategories vc","vc.id=vt.id_vehicleCategories","INNER");
+			$this->db->where("vt.id",$insert_id);
+			$query=$this->db->get();
+			return $query->row_array();
+		
+		}
+
+
+		function Update_typestatus($id){
+
+					$this->load->database();
+					$this->db->select("status");
+					$this->db->where('id', $id);
+					$query=$this->db->get("vehicletypes");
+					$data=$query->row_array();
+
+					if($data['status']==0){
+						$this->db->get("vehicletypes");
+						$this->db->where('id', $id);
+						$this->db->set('status', 1);
+						$this->db->update('vehicletypes');
+					}
+					if($data['status']==1){
+						$this->db->get("vehicletypes");
+						$this->db->where('id', $id);
+						$this->db->set('status', 0);
+						$this->db->update('vehicletypes');
+					}
+					$this->db->select("status");
+					$this->db->where('id', $id);
+					$query=$this->db->get("vehicletypes");
+
+					return $query->row_array();
+				}
+
+
+
+	function Update_type($data){
+
+			$this->load->database();
+			$this->db->get("vehicletypes");
+			$this->db->where('id', $data['id']);
+			$this->db->set('type', $data['type']);
+   			$this->db->update('vehicletypes');
+
+   			$this->db->select("*");
+			$this->db->where('id', $data['id']);
+			$query=$this->db->get("vehicletypes");
+			
+			return $query->row_array();
+
+
+
+		}
+
+
+/*************************************VEHICLE Name****************************************/
+		function get_vehiclename(){
+
+		}
+
+
+
 }
 
 

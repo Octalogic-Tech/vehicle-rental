@@ -24,13 +24,13 @@
 
                     <section class="content-header">
                         <h1>
-          Category Details
+          Typpe Details
           <small>Control panel</small>
         </h1>
                     </section>
                     <section class="content">
 
-                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Category</button>
+                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Type</button>
                         <br><br>
 
                         <!-- Modal -->
@@ -41,16 +41,28 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">ADD CATEGORY</h4>
+                                        <h4 class="modal-title">ADD TYPE</h4>
                                     </div>
 
                                     <div class="modal-body">
-                                        <form id="addcategory" class="form-inline">
-                                            <label for="Category">Category:</label>
-                                            <input type="text" id="category" placeholder="Enter Category" name="category">
-                                            <?php echo form_error("brandname"); ?>
-                                                <button type="submit">ADD</button>
+                                        <div class="box-body">
+                                        <form id="addtype" role="form">
+                                            <div class="form-group">
+                                                <label for="type">TYPE:</label>
+                                                  <input type="text" id="type" class="form-control" placeholder="Enter Type" name="type">
+                                                </div>
+                                                    <div class="form-group">
+                                                      <label>Select</label>
+                                                      <select  id="categoryid" class="form-control">
+                                                        <?php
+                                                          foreach ($catArray as $value) { ?>
+                                                        <option value="<?php echo $value->id; ?>"><?php echo $value->category_name; ?></option>
+                                                      <?php } ?>
+                                                      </select>
+                                                    </div>
+                                            <button type="submit" class="btn btn-primary">ADD</button>
                                         </form>
+                                    </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -67,13 +79,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">UPDATE CATEGORY</h4>
+                                        <h4 class="modal-title">UPDATE TYPE</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="Upcategory" class="form-inline">
+                                        <form id="Uptype" class="form-inline">
                                             <input type="hidden" id="id" placeholder="id" name="id">
-                                            <label for="category1">Brand Name:</label>
-                                            <input type="text" id="category1" placeholder="Enter New Category" name="category1">
+                                            <label for="type1">TYPE:</label>
+                                            <input type="text" id="type1" placeholder="Enter New Type" name="type11">
                                           
                                                 <button type="submit">UPDATE</button>
                                         </form>
@@ -92,7 +104,8 @@
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
-                                    <th id="category">CATEGORY</th>
+                                    <th id="catid">CATEGORY ID</th>
+                                    <th id="type">TYPE</th>
                                     <th id="delete">DELETE</th>
                                     <th id="update">UPDATE</th>
                                     <!-- <th>STATUS</th>-->
@@ -100,14 +113,19 @@
                             </thead>
                             <tbody>
                                 <?php
+                              
         foreach ($userArray as $value) { ?>
                                     <tr id="<?php echo "t";echo $value->id; ?>">
                                         <td id="<?php echo "id";echo $value->id; ?>">
                                             <?php echo $value->id; ?>
                                         </td>
 
+                                        <td id="<?php echo "idc";echo $value->id; ?>">
+                                            <?php echo $value->category_name; ?>
+                                        </td>
+
                                         <td id="<?php echo "n";echo $value->id; ?>">
-                                            <?php echo $value->name; ?>
+                                            <?php echo $value->type; ?>
                                         </td>
 
                                         <td class="<?php echo $value->id; ?>">
@@ -141,27 +159,13 @@
             data: {
                 id: id
             },
-            url: "<?php echo base_url('/Change_categorystatus'); ?>",
+            url: "<?php echo base_url('/Change_typestatus'); ?>",
             success: function(data) {
-                var x = "#t" + id;
-                // $(x).prev().html (data);
+                var x = "#t" + id;;
                 alert(id);
                 alert("Delete Successful");
-                //$(x).remove();
-                // var i="button#"+id;
-                // alert(i);
-                // var table1 = $('#tablebrand').DataTable();
-                //               $('#tablebrand tbody').on( 'click', "button#"+id, function () {
-                //                 alert("done");
-
-                //             table1
-                //                 .row( $(this).closest('tr') )
-                //                 .remove()
-                //                 .draw();
-                // });
                 var table = $('#tablebrand').DataTable();
-                table .row( $(x))  .remove() .draw();
-
+                table .row( $(x)).remove().draw();
          }
                     
          }
@@ -175,32 +179,13 @@
     }
 
     function Launch_updatemodal(id) {
-      alert(id);
-
+        alert(id);
         var a ="#n"+id;
         alert(a);
         var nam = $(a).text().replace(/\s+/g,' ').trim();;
         alert(nam);
-
-
-        /*var table = $('#tablebrand').DataTable();
-        var x = "#t" + id;
-        var info = $(x).find('td').eq(1).text();
-        alert(info);*/
- 
-      /*var cellval=$('#tablebrand tbody').on( 'click', 'tr', function () {
-          alert( 'Row index: '+table.row( this ).index() );
-           d='Row index: '+table.row( this ).index();
-           alert(d);
-           return cellval;
-        } );*/
-     // console.log( table.rows(cellval).columns(1).html() );
-        //var nam1=$('#id').text();
-        //$(".modal-body #brandname").val( id );
         $(".modal-body #id").val(id);
-        $(".modal-body #category1").val(nam);
-        // $('#addBookDialog').modal('show');
-
+        $(".modal-body #type1").val(nam);
     }
 
     function toggleAlert() {
@@ -215,45 +200,42 @@
         responsive: true
     });
           
- 
-
-        $("#addcategory").submit(function() {
-            var category = $('#category').val();
-            //alert(brandname);
+    $("#addtype").submit(function() {
+            var type = $('#type').val();
+            var categoryid = $('#categoryid').val();
+            alert(type);
             $.ajax({
                 method: 'POST',
                 data: {
-                    'category': category
+                    'type': type,
+                    'categoryid': categoryid
                 },
-                url: "<?php echo base_url('/Insert_category'); ?>",
+                url: "<?php echo base_url('/Insert_type'); ?>",
                 success: function(data) {
 
-                    // $(x).prev().html (data);
-                    $("#myModal").modal("toggle");
+                     $("#myModal").modal("toggle");
+                    
                     var obj = JSON.parse(data);
-                    alert("Category: " + obj.name + ". Added Successfully");
-                    /*var idr="t"+obj.id;
-                     var idi="id"+obj.id;
-                     var idn="n"+obj.id;
-                     var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton></td></tr>';
-
-                      $('#tablebrand tbody').append(markup);*/
-                      var idr="t"+obj.id;
-                     var idi="id"+obj.id;
-                     var idn="n"+obj.id;
+                    alert("Type: " + obj.type + ". Added Successfully");
+                    var idr="t"+obj.id;
+                    var idc="c"+obj.id;
+                    var idi="id"+obj.id;
+                    var idn="n"+obj.id;
                     var idid = '<td id="'+idi+'">'+obj.id+'</td>';
-                    var idname='<td id="'+idn+'">'+obj.name+'</td>';
+                    var idname='<td id="'+idn+'">'+obj.type+'</td>';
+                    var category_name='<td id="'+idc+'">'+obj.category_name+'</td>';
 
                     var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="Deletebrand(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
 
-                    var row= table1.row.add([idid, idname, deletebtn, updatebtn]).draw().node();
-                     $(row).attr("id", "t"+obj.id);
+                    var row= table1.row.add([idid, category_name,idname, deletebtn, updatebtn]).draw().node();
+                      $(row).attr("id", "t"+obj.id);
                   
                       $(row).find('td').eq(0).attr('id', "id"+obj.id);
-                      $(row).find('td').eq(1).attr('id', "n"+obj.id);
-                      $(row).find('td').eq(2).attr('class', +obj.id);
-                      $(row).find('td').eq(3).attr('class', +obj.id);
+                      $(row).find('td').eq(1).attr('id', "c"+obj.id);
+                      $(row).find('td').eq(2).attr('id', "n"+obj.id);
+                      $(row).find('td').eq(4).attr('class', +obj.id);
+                      $(row).find('td').eq(5).attr('class', +obj.id);
 
                 }
             });
@@ -261,25 +243,25 @@
             return false;
         });
 
-        //-------------------------------------- UPDATE BRAND------------------------------->
+        //-------------------------------------- UPDATE TYPE------------------------------->
 
-        $("#Upcategory").submit(function() {
+        $("#Uptype").submit(function() {
             var id = $('#id').val();
-            var category = $('#category1').val();
+            var type = $('#type1').val();
             //  alert(haha);
             $.ajax({
                 method: 'POST',
                 data: {
                     'id': id,
-                    'category': category
+                    'type': type
                 },
-                url: "<?php echo base_url('/Change_category'); ?>",
+                url: "<?php echo base_url('/Change_type'); ?>",
                 success: function(data) {
                     var obj = JSON.parse(data);
                     $("#myModal2").modal("toggle");
                     alert("Update Successful");
                     var idn = "#n" + obj.id;
-                    var n = obj.name;
+                    var n = obj.type;
                     $(idn).html(n);
                     toggleAlert("Update Successful");
                     //alert(data);
