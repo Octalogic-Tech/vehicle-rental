@@ -11,15 +11,16 @@ class Vrapicontroller extends CI_Controller {
 	public function customer_vehicles_list()
 	{
 		$this->load->model('Vr_api_model');
-		$counter=$this->input->post('count');
+		//$counter=$this->input->post('count');
+		$counter = 0;
 
 		$limit = 10;
 		if ($counter <= 0) {
-			$start = 1;
+			$start = 0;
 		}
 		else {
 			$start = $limit * $counter;
-			++$start;
+			$start;
 		}
 		
 		$arr=$this->Vr_api_model->return_customer_vehicles_list($limit,$start);
