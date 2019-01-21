@@ -75,10 +75,19 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'vehicle_rental',
+
+	/*.......... Local DB ..........*/
+	// 'hostname' => 'localhost',
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'vehicle_rental',
+
+	/*.......... Online DB ..........*/
+	'hostname' => '103.50.162.147',
+	'username' => 'hdsys9r7_vhrntl',
+	'password' => 'sb]6sh^1IRKP',
+	'database' => 'hdsys9r7_vehicle-rental',
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

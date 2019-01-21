@@ -26,9 +26,24 @@ class Vr_api_model extends CI_Model{
 		$this->db->order_by('vehiclesrent.id','asc');
 
 		$query=$this->db->get();
-		return $query->result();
+
+		$arr_val=$query->result_array();
+
+		for ($i=0; $i <sizeof($arr_val) ; $i++) { 
+			$arr_val[$i]=$this->modify_id($arr_val[$i]);
+		}
+
+		return $arr_val;
 
 
+		// return $query->result();
+
+
+	}
+
+	function modify_id($row){
+		$row['id']=(int)$row['id'];
+		return $row;
 	}
 
 

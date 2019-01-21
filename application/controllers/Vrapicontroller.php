@@ -11,8 +11,8 @@ class Vrapicontroller extends CI_Controller {
 	public function customer_vehicles_list()
 	{
 		$this->load->model('Vr_api_model');
-		//$counter=$this->input->post('count');
-		$counter = 0;
+		$counter=$this->input->post('count');
+		// $counter = 0;
 
 		$limit = 10;
 		if ($counter <= 0) {
@@ -24,6 +24,7 @@ class Vrapicontroller extends CI_Controller {
 		}
 		
 		$arr=$this->Vr_api_model->return_customer_vehicles_list($limit,$start);
+		
 		$data["json"] = json_encode($arr, JSON_PRETTY_PRINT);
 
 		$this->load->view('api/vr_api_view',$data);
