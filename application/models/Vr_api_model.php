@@ -2,6 +2,23 @@
 
 class Vr_api_model extends CI_Model{
 
+
+	public function __construct() {
+ 
+       parent::__construct();
+ 
+   	}
+ 
+ 
+ 
+   public function record_count() {
+ 
+       return $this->db->count_all("vehiclesrent");
+ 
+   	}
+
+
+
 	function return_customer_vehicles_list($limit, $start){
 
 		$this->load->database();
@@ -36,10 +53,8 @@ class Vr_api_model extends CI_Model{
 		return $arr_val;
 
 
-		// return $query->result();
-
-
 	}
+
 
 	function modify_id($row){
 		$row['id']=(int)$row['id'];

@@ -63,7 +63,7 @@ $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 
 /*............................................. API routes .............................................*/
-$route['customer/vehicles/list'] = 'Vrapicontroller/customer_vehicles_list';
+$route['api_list/customer/vehicles/list'] = 'Vrapicontroller/customer_vehicles_list';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
