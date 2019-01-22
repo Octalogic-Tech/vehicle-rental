@@ -10,7 +10,7 @@ class Vr_api_model extends CI_Model{
 		$this->db->limit($limit, $start);
 
 
-		$this->db->select('vehiclesrent.id,vehiclenames.name AS name,vehiclebrands.name AS brand,vehicletypes.type,vehiclecategories.name AS categories,vendors.firstname,vendors.lastname,localities.place,colors.colorName');
+		$this->db->select('vehiclesrent.id,vehiclenames.name AS name,vehiclebrands.name AS brand,vehicletypes.type,vehiclecategories.name AS categories,vendors.firstname,vendors.lastname,localities.place,colors.colorName,vehiclesrent.ratePerDay AS rate');
 
 		$this->db->from('vehiclesrent');
 		$this->db->join('vehiclenames','vehiclenames.id=vehiclesrent.id_vehicleNames','LEFT');
@@ -42,6 +42,7 @@ class Vr_api_model extends CI_Model{
 
 	function modify_id($row){
 		$row['id']=(int)$row['id'];
+		$row['rate']=(float)$row['rate'];
 		return $row;
 	}
 
