@@ -3,7 +3,9 @@
 
 
 		//......Printing Api Info
+		echo '<pre>';
 		echo($json);
+		echo "</pre>";
 
 	
 ?>
