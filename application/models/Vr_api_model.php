@@ -42,7 +42,6 @@ class Vr_api_model extends CI_Model{
 
 	function modify_id($row){
 		$row['id']=(int)$row['id'];
-		$row['rate']=(float)$row['rate'];
 		return $row;
 	}
 
