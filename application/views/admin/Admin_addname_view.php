@@ -24,13 +24,13 @@
 
                     <section class="content-header">
                         <h1>
-          Typpe Details
+          Vehicle Name Details
           <small>Control panel</small>
         </h1>
                     </section>
                     <section class="content">
 
-                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Type</button>
+                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Name</button>
                         <br><br>
 
                         <!-- Modal -->
@@ -41,25 +41,38 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">ADD TYPE</h4>
+                                        <h4 class="modal-title">ADD NAME</h4>
                                     </div>
 
                                     <div class="modal-body">
                                         <div class="box-body">
-                                        <form id="addtype" role="form">
+                                        <form id="addname" role="form">
                                             <div class="form-group">
-                                                <label for="type">TYPE:</label>
-                                                  <input type="text" id="type" class="form-control" placeholder="Enter Type" name="type">
+                                                <label for="name">NAME:</label>
+                                                  <input type="text" id="name" class="form-control" placeholder="Enter NAME" name="name">
                                                 </div>
                                                     <div class="form-group">
-                                                      <label>Select</label>
-                                                      <select  id="categoryid" class="form-control">
+                                                      <label>Select Vehicle Brand</label>
+                                                      <select  id="brandid" class="form-control">
                                                         <?php
-                                                          foreach ($catArray as $value) { ?>
-                                                        <option value="<?php echo $value->id; ?>"><?php echo $value->category_name; ?></option>
+                                                          foreach ($brandArray as $value) { ?>
+                                                        <option value="<?php echo $value->id; ?>"><?php echo $value->brand_name; ?></option>
                                                       <?php } ?>
                                                       </select>
                                                     </div>
+
+                                                    <div class="form-group">
+                                                      <label>Select Vehicle Type</label>
+                                                      <select  id="typeid" class="form-control">
+                                                        <?php
+                                                          foreach ($typeArray as $value) { ?>
+                                                        <option value="<?php echo $value->id; ?>"><?php echo $value->type_name; ?></option>
+                                                      <?php } ?>
+                                                      </select>
+                                                    </div>
+
+
+
                                             <button type="submit" class="btn btn-primary">ADD</button>
                                         </form>
                                     </div>
@@ -79,13 +92,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">UPDATE TYPE</h4>
+                                        <h4 class="modal-title">UPDATE NAME</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="Uptype" class="form-inline">
+                                        <form id="Upname" class="form-inline">
                                             <input type="hidden" id="id" placeholder="id" name="id">
                                             <label for="type1">TYPE:</label>
-                                            <input type="text" id="type1" placeholder="Enter New Type" name="type11">
+                                            <input type="text" id="name1" placeholder="Enter New Name" name="name1">
                                           
                                                 <button type="submit">UPDATE</button>
                                         </form>
@@ -104,7 +117,9 @@
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
-                                    <th id="catid">CATEGORY ID</th>
+                                    <th id="name">NAME</th>
+                                    <th id="bname">BRAND NAME</th>
+                                    <th id="category">CATEGORY</th>
                                     <th id="type">TYPE</th>
                                     <th id="delete">DELETE</th>
                                     <th id="update">UPDATE</th>
@@ -120,14 +135,22 @@
                                             <?php echo $value->id; ?>
                                         </td>
 
-                                        <td id="<?php echo "idc";echo $value->id; ?>">
+                                        <td id="<?php echo "idn";echo $value->id; ?>">
+                                            <?php echo $value->name; ?>
+                                        </td>
+
+                                        <td id="<?php echo "idb";echo $value->id; ?>">
+                                            <?php echo $value->brand_name; ?>
+                                        </td>
+
+                                         <td id="<?php echo "idc";echo $value->id; ?>">
                                             <?php echo $value->category_name; ?>
                                         </td>
 
-                                        <td id="<?php echo "n";echo $value->id; ?>">
-                                            <?php echo $value->type; ?>
+                                        <td id="<?php echo "idt";echo $value->id; ?>">
+                                            <?php echo $value->type_name; ?>
                                         </td>
-
+ 
                                         <td class="<?php echo $value->id; ?>">
                                             <button id="<?php echo $value->id; ?>" type="button" class="btn btn-danger" onclick="Deletebrand('<?php echo $value->id; ?>')">Delete</button>
                                         </td>
@@ -159,7 +182,7 @@
             data: {
                 id: id
             },
-            url: "<?php echo base_url('/Change_typestatus'); ?>",
+            url: "<?php echo base_url('/Change_namestatus'); ?>",
             success: function(data) {
                 var x = "#t" + id;;
                 alert(id);
@@ -180,12 +203,12 @@
 
     function Launch_updatemodal(id) {
         alert(id);
-        var a ="#n"+id;
+        var a ="#idn"+id;
         alert(a);
         var nam = $(a).text().replace(/\s+/g,' ').trim();;
         alert(nam);
         $(".modal-body #id").val(id);
-        $(".modal-body #type1").val(nam);
+        $(".modal-body #name1").val(nam);
     }
 
     function toggleAlert() {
@@ -200,42 +223,54 @@
         responsive: true
     });
           
-    $("#addtype").submit(function() {
-            var type = $('#type').val();
-            var categoryid = $('#categoryid').val();
-            alert(type);
+    $("#addname").submit(function() {
+            var name = $('#name').val();
+            var brandid = $('#brandid').val();
+            var typeid = $('#typeid').val();
+            alert(name);
+            alert(brandid);
+            alert(typeid);
+
             $.ajax({
                 method: 'POST',
                 data: {
-                    'type': type,
-                    'categoryid': categoryid
+                    'name': name,
+                    'brandid': brandid,
+                    'typeid': typeid
                 },
-                url: "<?php echo base_url('/Insert_type'); ?>",
+                url: "<?php echo base_url('/Insert_name'); ?>",
                 success: function(data) {
 
                      $("#myModal").modal("toggle");
                     
+                    alert(data);
                     var obj = JSON.parse(data);
-                    alert("Type: " + obj.type + ". Added Successfully");
-                    var idr="t"+obj.id;
-                    var idc="c"+obj.id;
-                    var idi="id"+obj.id;
+                    alert("Type: " + obj.name + ". Added Successfully");
+                    var i="id"+obj.id;
                     var idn="n"+obj.id;
-                    var idid = '<td id="'+idi+'">'+obj.id+'</td>';
-                    var idname='<td id="'+idn+'">'+obj.type+'</td>';
-                    var category_name='<td id="'+idc+'">'+obj.category_name+'</td>';
+                    var idb="b"+obj.id;
+                    var idc="c"+obj.id;
+                    var idt="t"+obj.id;
+                    var idid = '<td id="'+i+'">'+obj.id+'</td>';
+                    var idname='<td id="'+idn+'">'+obj.name+'</td>';
+                    var type_name=obj.type_name;
+                    var brand_name=obj.brand_name;
+
+                    var category_name=obj.category_name;
 
                     var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="Deletebrand(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
 
-                    var row= table1.row.add([idid, category_name,idname, deletebtn, updatebtn]).draw().node();
+                    var row= table1.row.add([idid, idname,type_name,brand_name,category_name, deletebtn, updatebtn]).draw().node();
                       $(row).attr("id", "t"+obj.id);
                   
-                      $(row).find('td').eq(0).attr('id', "id"+obj.id);
-                      $(row).find('td').eq(1).attr('id', "c"+obj.id);
-                      $(row).find('td').eq(2).attr('id', "n"+obj.id);
-                      $(row).find('td').eq(4).attr('class', +obj.id);
+                      $(row).find('td').eq(0).attr('id', "idid"+obj.id);
+                      $(row).find('td').eq(1).attr('id', "idn"+obj.id);
+                      $(row).find('td').eq(2).attr('id', "idb"+obj.id);
+                      $(row).find('td').eq(3).attr('id', "idc"+obj.id);
+                      $(row).find('td').eq(4).attr('id', "idt"+obj.id);
                       $(row).find('td').eq(5).attr('class', +obj.id);
+                      $(row).find('td').eq(6).attr('class', +obj.id);
 
                 }
             });
@@ -245,23 +280,23 @@
 
         //-------------------------------------- UPDATE TYPE------------------------------->
 
-        $("#Uptype").submit(function() {
+        $("#Upname").submit(function() {
             var id = $('#id').val();
-            var type = $('#type1').val();
+            var name = $('#name1').val();
             //  alert(haha);
             $.ajax({
                 method: 'POST',
                 data: {
                     'id': id,
-                    'type': type
+                    'name': name
                 },
-                url: "<?php echo base_url('/Change_type'); ?>",
+                url: "<?php echo base_url('/Change_name'); ?>",
                 success: function(data) {
                     var obj = JSON.parse(data);
                     $("#myModal2").modal("toggle");
                     alert("Update Successful");
-                    var idn = "#n" + obj.id;
-                    var n = obj.type;
+                    var idn = "#idn" + obj.id;
+                    var n = obj.name;
                     $(idn).html(n);
                     toggleAlert("Update Successful");
                     //alert(data);

@@ -25,16 +25,11 @@
 
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Add Vendors</a></li>
+            <li><a href="<?php echo base_url('/Display_vendor'); ?>"><i class="fa fa-circle-o"></i> Add Vendors</a></li>
             <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> View Vendors</a></li>
           </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>View Vehicle Details</span>
-            
-          </a>
-        </li>
+        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -52,6 +47,12 @@
             <li><a href="<?php echo base_url('/Display_vehicletype'); ?>"><i class="fa fa-circle-o"></i> Vehicle Type </a></li>     
             <li><a href="<?php echo base_url('/Display_vehiclename'); ?>"><i class="fa fa-circle-o"></i> Vehicle Name</a></li>
           </ul>
+        </li>
+        <li>
+          <a href="<?php echo base_url('/Display_locality'); ?>">
+            <i class="fa fa-th"></i> <span>Add Locality</span>
+            
+          </a>
         </li>
 
         <li class="header">LABELS</li>

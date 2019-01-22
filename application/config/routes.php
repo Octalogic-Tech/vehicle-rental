@@ -59,6 +59,8 @@ $route['update'] = 'Admincontroller/update';
 $route['insert_brand'] = 'Admincontroller/insert_brand';
 $route['Insert_category'] = 'Admincontroller/Insert_category';
 $route['Insert_type'] = 'Admincontroller/Insert_type';
+$route['Insert_name'] = 'Admincontroller/Insert_name';
+$route['Insert_locality'] = 'Admincontroller/Insert_locality';
 
 
 /*--------------------------------------UPDATE------------------------------------------*/
@@ -66,13 +68,15 @@ $route['Insert_type'] = 'Admincontroller/Insert_type';
 $route['Change_brandname'] = 'Admincontroller/Change_brandname';
 $route['Change_category'] = 'Admincontroller/Change_category';
 $route['Change_type'] = 'Admincontroller/Change_type';
-
+$route['Change_name'] = 'Admincontroller/Change_name';
+$route['Change_locality'] = 'Admincontroller/Change_locality';
 /*--------------------------------------DELETE------------------------------------------*/
 
 $route['Change_brandstatus'] = 'Admincontroller/Change_brandstatus';
 $route['Change_categorystatus'] = 'Admincontroller/Change_categorystatus';
 $route['Change_typestatus'] = 'Admincontroller/Change_typestatus';
-
+$route['Change_namestatus'] = 'Admincontroller/Change_namestatus';
+$route['Change_localitystatus'] = 'Admincontroller/Change_localitystatus';
 
 /*--------------------------------------DISPLAY------------------------------------------*/
 
@@ -80,6 +84,9 @@ $route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
 $route['Display_vehiclecategory']= 'Admincontroller/Display_vehiclecategory';
 $route['Display_vehicletype']= 'Admincontroller/Display_vehicletype';
 $route['Display_vehiclename']= 'Admincontroller/Display_vehiclename';
+$route['Display_locality']= 'Admincontroller/Display_locality';
+
+$route['Display_vendor']= 'Admincontroller/Display_vendor';
 
 
 $route['form_validation/[:any]']='Admincontroller/form_validation/';
@@ -88,6 +95,8 @@ $route['update/(:num)'] = 'Admincontroller/update/$1';
 $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
 $route['Change_categorystatus/(:num)'] = 'Admincontroller/Change_categorystatus/$1';
 $route['Change_typestatus/(:num)'] = 'Admincontroller/Change_typestatus/$1';
+$route['Change_namestatus/(:num)'] = 'Admincontroller/Change_namestatus/$1';
+$route['Change_localitystatus/(:num)'] = 'Admincontroller/Change_localitystatus/$1';
 //$route['Change_brandname/(:any)'] = 'Admincontroller/Change_brandname/';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 

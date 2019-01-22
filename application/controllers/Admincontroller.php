@@ -248,16 +248,132 @@ class Admincontroller extends CI_Controller {
 	public function Display_vehiclename(){
 		$this->load->model('Vendor_model');
 		$data['userArray']=$this->Vendor_model->get_vehiclename();
-		//$data['catArray']=$this->Vendor_model->get_activecategory();
-		$this->load->view('admin/Admin_addtype_view',$data);
+		$data['brandArray']=$this->Vendor_model->get_activebrand();
+		$data['typeArray']=$this->Vendor_model->get_activetype();
+
+		$this->load->view('admin/Admin_addname_view',$data);
+
+	}
+
+	public function Change_namestatus(){
+		$id=$this->input->post('id');
+		$this->load->model('Vendor_model');
+		$data=$this->Vendor_model->Update_namestatus($id);
+		print_r($data['status']);
+	}
+
+
+
+
+	public function Insert_name(){
+
+		$this->load->helper('url');
+		$data = array( 
+
+						'id_vehicleBrands'     => $this->input->post('brandid'),
+						'id_vehicleTypes'     => $this->input->post('typeid'),
+                      	'name'     => $this->input->post('name'),
+
+                     );  
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->insert_namedata($data);
+	
+		$myJSON=json_encode($array);
+		echo $myJSON;
+		//echo "Success";
 
 	}
 
 
 
 
+public function Change_name(){
+		$this->load->helper('url');
+		$data = array(
+
+						'id'	=>	$this->input->post('id'),
+                      	'name'     => $this->input->post('name'),  
+                        );
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Update_name($data);
+		$myJSON=json_encode($array);
+		echo $myJSON;
+
+	}
 
 
 
 
+	/*****************************LOCALITY*************************************/
+	function Display_locality(){
+
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_locality();
+		$this->load->view('admin/admin_addlocality_view',$data);
+
+	}
+
+	function Change_localitystatus(){
+
+		$id=$this->input->post('id');
+		$this->load->model('Vendor_model');
+		$data=$this->Vendor_model->Update_localitystatus($id);
+		//$data['userArray']=$this->Vendor_model->update_status();
+		print_r($data['status']);
+	}
+
+	
+
+
+		public function Change_locality(){
+
+
+		$this->load->helper('url');
+		//$id= $this->input->post('id');
+	
+		//$name =$this->input->post('brandname');
+		$data = array(
+
+						'id'	=>	$this->input->post('id'),
+                      	'place'     => $this->input->post('place'),  
+                        );
+
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Update_locality($data);
+		//echo $data['name'];
+		 $myJSON=json_encode($array);
+		 echo $myJSON;
+
+	}
+
+	public function Insert_locality(){
+
+		$this->load->helper('url');
+		$data = array(  
+                       'place'     => $this->input->post('locality_place'),  
+                        );  
+
+		 $this->load->model('Vendor_model');
+		 $insert_id=$this->Vendor_model->insert_localitydata($data);
+
+		 $array = $this->array_push_assoc($data, 'id', $insert_id);
+
+		 $myJSON=json_encode($array);
+		 echo $myJSON; 
+
+	}
+
+	/*************************Admin Add Vendor*********************************/
+
+
+
+	function Display_vendor(){
+
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->return_vendors();
+		$this->load->view('admin/admin_addvendor_view',$data);
+
+	}
 }

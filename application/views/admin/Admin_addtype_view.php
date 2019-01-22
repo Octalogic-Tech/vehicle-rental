@@ -24,7 +24,7 @@
 
                     <section class="content-header">
                         <h1>
-          Typpe Details
+          Vehicle Type Details
           <small>Control panel</small>
         </h1>
                     </section>

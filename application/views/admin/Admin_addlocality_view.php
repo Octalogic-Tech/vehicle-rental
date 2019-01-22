@@ -24,13 +24,13 @@
 
                     <section class="content-header">
                         <h1>
-          Brand Details
+          Locality Details
           <small>Control panel</small>
         </h1>
                     </section>
                     <section class="content">
 
-                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Brand</button>
+                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Locality</button>
                         <br><br>
 
                         <!-- Modal -->
@@ -41,14 +41,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">ADD BRAND</h4>
+                                        <h4 class="modal-title">ADD LOCALITY</h4>
                                     </div>
 
                                     <div class="modal-body">
-                                        <form id="addbrand" class="form-inline">
-                                            <label for="brandname">Brand Name:</label>
-                                            <input type="text" id="brandname" placeholder="Enter Brand Name" name="brandname">
-                                            <?php echo form_error("brandname"); ?>
+                                        <form id="addlocality" class="form-inline">
+                                            <label for="locality">Locality:</label>
+                                            <input type="text" id="locality" placeholder="Enter Locality" name="locality">
+         
                                                 <button type="submit">ADD</button>
                                         </form>
                                     </div>
@@ -67,13 +67,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">UPDATE BRAND</h4>
+                                        <h4 class="modal-title">UPDATE LOCALITY</h4>
                                     </div>
                                     <div class="modal-body">
                                         <form id="Upbrand" class="form-inline">
                                             <input type="hidden" id="id" placeholder="id" name="id">
-                                            <label for="brandname">Brand Name:</label>
-                                            <input type="text" id="brandname1" placeholder="Enter New Brand Name" name="brandname">
+                                            <label for="locality1">Locality:</label>
+                                            <input type="text" id="locality1" placeholder="Enter New locality" name="locality1">
                                           
                                                 <button type="submit">UPDATE</button>
                                         </form>
@@ -92,7 +92,7 @@
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
-                                    <th id="brand_name">BRAND NAME</th>
+                                    <th id="place_name">PLACE</th>
                                     <th id="delete">DELETE</th>
                                     <th id="update">UPDATE</th>
                                     <!-- <th>STATUS</th>-->
@@ -106,8 +106,8 @@
                                             <?php echo $value->id; ?>
                                         </td>
 
-                                        <td id="<?php echo "n";echo $value->id; ?>">
-                                            <?php echo $value->name; ?>
+                                        <td id="<?php echo "p";echo $value->id; ?>">
+                                            <?php echo $value->place; ?>
                                         </td>
 
                                         <td class="<?php echo $value->id; ?>">
@@ -141,24 +141,13 @@
             data: {
                 id: id
             },
-            url: "<?php echo base_url('/Change_brandstatus'); ?>",
+            url: "<?php echo base_url('/Change_localitystatus'); ?>",
             success: function(data) {
                 var x = "#t" + id;
-                // $(x).prev().html (data);
+
                 alert(id);
                 alert("Delete Successful");
-                //$(x).remove();
-                // var i="button#"+id;
-                // alert(i);
-                // var table1 = $('#tablebrand').DataTable();
-                //               $('#tablebrand tbody').on( 'click', "button#"+id, function () {
-                //                 alert("done");
 
-                //             table1
-                //                 .row( $(this).closest('tr') )
-                //                 .remove()
-                //                 .draw();
-                // });
 var table = $('#tablebrand').DataTable();
                 table
         .row( $(x))
@@ -172,36 +161,20 @@ var table = $('#tablebrand').DataTable();
 
     function Launch_insertmodal() {
 
-        $(".modal-body #brandname").val(null);
+        $(".modal-body #locality").val(null);
 
     }
 
     function Launch_updatemodal(id) {
       alert(id);
 
-        var a ="#n"+id;
+        var a ="#p"+id;
         alert(a);
         var nam = $(a).text().replace(/\s+/g,' ').trim();;
         alert(nam);
-
-
-        /*var table = $('#tablebrand').DataTable();
-        var x = "#t" + id;
-        var info = $(x).find('td').eq(1).text();
-        alert(info);*/
- 
-      /*var cellval=$('#tablebrand tbody').on( 'click', 'tr', function () {
-          alert( 'Row index: '+table.row( this ).index() );
-           d='Row index: '+table.row( this ).index();
-           alert(d);
-           return cellval;
-        } );*/
-     // console.log( table.rows(cellval).columns(1).html() );
-        //var nam1=$('#id').text();
-        //$(".modal-body #brandname").val( id );
         $(".modal-body #id").val(id);
-        $(".modal-body #brandname1").val(nam);
-        // $('#addBookDialog').modal('show');
+        $(".modal-body #locality1").val(nam);
+        
 
     }
 
@@ -219,26 +192,32 @@ var table = $('#tablebrand').DataTable();
           
  
 
-        $("#addbrand").submit(function() {
-            var brandname = $('#brandname').val();
+        $("#addlocality").submit(function() {
+            var locality_place = $('#locality').val();
             //alert(brandname);
             $.ajax({
                 method: 'POST',
                 data: {
-                    'brandname': brandname
+                    'locality_place': locality_place
                 },
-                url: "<?php echo base_url('/insert_brand'); ?>",
+                url: "<?php echo base_url('/Insert_locality'); ?>",
                 success: function(data) {
 
+                    // $(x).prev().html (data);
                     $("#myModal").modal("toggle");
                     var obj = JSON.parse(data);
-                    alert("Brand Name: " + obj.name + ". Added Successfully");
-  
-                    var idr="t"+obj.id;
+                    alert("Locality: " + obj.place + ". Added Successfully");
+                    /*var idr="t"+obj.id;
+                     var idi="id"+obj.id;
+                     var idn="n"+obj.id;
+                     var markup = '<tr id="'+idr+'"><td id="'+idi+'">'+obj.id+'</td><td id="'+idn+'">'+obj.name+'</td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-danger" onclick="Deletebrand('+obj.id+')">Delete</buttton></td><td class="'+obj.id+'"><button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton></td></tr>';
+
+                      $('#tablebrand tbody').append(markup);*/
+                     var idr="t"+obj.id;
                     var idi="id"+obj.id;
-                    var idn="n"+obj.id;
+                    var idn="p"+obj.id;
                     var idid = '<td id="'+idi+'">'+obj.id+'</td>';
-                    var idname='<td id="'+idn+'">'+obj.name+'</td>';
+                    var idname='<td id="'+idn+'">'+obj.place+'</td>';
 
                     var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="Deletebrand(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
@@ -247,7 +226,7 @@ var table = $('#tablebrand').DataTable();
                      $(row).attr("id", "t"+obj.id);
                   
                       $(row).find('td').eq(0).attr('id', "id"+obj.id);
-                      $(row).find('td').eq(1).attr('id', "n"+obj.id);
+                      $(row).find('td').eq(1).attr('id', "p"+obj.id);
                       $(row).find('td').eq(2).attr('class', +obj.id);
                       $(row).find('td').eq(3).attr('class', +obj.id);
 
@@ -261,21 +240,21 @@ var table = $('#tablebrand').DataTable();
 
         $("#Upbrand").submit(function() {
             var id = $('#id').val();
-            var brandname = $('#brandname1').val();
+            var place = $('#locality1').val();
             //  alert(haha);
             $.ajax({
                 method: 'POST',
                 data: {
                     'id': id,
-                    'brandname': brandname
+                    'place': place
                 },
-                url: "<?php echo base_url('/Change_brandname'); ?>",
+                url: "<?php echo base_url('/Change_locality'); ?>",
                 success: function(data) {
                     var obj = JSON.parse(data);
                     $("#myModal2").modal("toggle");
                     alert("Update Successful");
-                    var idn = "#n" + obj.id;
-                    var n = obj.name;
+                    var idn = "#p" + obj.id;
+                    var n = obj.place;
                     $(idn).html(n);
                     toggleAlert("Update Successful");
                     //alert(data);
