@@ -97,10 +97,16 @@
 
                             </div>
                         </div>
+                                                    <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              
+            </div>
   
             <div class="box-body">
 
-                        <table id="tablebrand" class="table table-hover">
+                        <table id="tablebrand" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
@@ -143,6 +149,7 @@
                         </table>
                 </div>
             <!-- /.box-body -->
+        </div></div></div>
 
                     </section>
                 </div>
@@ -151,8 +158,7 @@
 
     </div>
     <?php $this->view('admin/Admin_script'); ?>
-</body>
-<script type="text/javascript">
+    <script type="text/javascript">
     function Deletebrand(id) {
         $.ajax({
             method: 'POST',
@@ -194,6 +200,12 @@
     }
 
     $(document).ready(function() {
+
+     if(location.pathname=="/vehicle-rental/Display_vehicletype")
+    {
+      $("#l13").addClass("active");
+      $("#l1").addClass("active");
+    }
 
         var table1 = $('#tablebrand').DataTable({
         
@@ -274,5 +286,7 @@
 
     });
 </script>
+
+</body>
 
 </html>

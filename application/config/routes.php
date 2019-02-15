@@ -61,6 +61,7 @@ $route['Insert_category'] = 'Admincontroller/Insert_category';
 $route['Insert_type'] = 'Admincontroller/Insert_type';
 $route['Insert_name'] = 'Admincontroller/Insert_name';
 $route['Insert_locality'] = 'Admincontroller/Insert_locality';
+$route['Add_vendor'] = 'Admincontroller/Add_vendor';
 
 
 /*--------------------------------------UPDATE------------------------------------------*/

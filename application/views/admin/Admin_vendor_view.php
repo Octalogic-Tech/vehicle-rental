@@ -41,8 +41,15 @@
 
     <!-- Main content -->
     <section class="content">
+   <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              
+            </div>
+             <div class="box-body">
       <!-- Small boxes (Stat box) -->
-       <table  class="table table-hover">
+       <table  class="table table-bordered table-hover">
         <tr>
          <th>ID</th>
          <th>ID LOGIN</th>
@@ -79,25 +86,24 @@
         </tr>  
   <?php } ?>
       </table>
+        </div>
+    </div>
+  </div>
+</div>
     </section>
     <!-- /.content -->
   </div>
+  </section>
+</div>
   <!-- /.content-wrapper -->
   <?php $this->view('admin/Admin_footer'); ?>
 
-  <!-- Control Sidebar -->
-  
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
  <?php $this->view('admin/Admin_script'); ?>
-</body>
-  <script type="text/javascript">
+   <script type="text/javascript">
     $(document).ready(function(){
       $('button').click(function(){
         var id=this.id;
@@ -109,9 +115,6 @@
           success:function(data){
             var x='.'+id;
             $(x).prev().html (data);
-            
-          
-            
           }
 
         });
@@ -120,4 +123,6 @@
 
     });
     </script>
+</body>
+
 </html>

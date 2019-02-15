@@ -22,7 +22,8 @@ class Admincontroller extends CI_Controller {
 	{
 		$this->load->model('Vendor_model');
 		$data['userArray']=$this->Vendor_model->return_vendors();
-		$this->load->view('admin/admin_vendor_view',$data);
+		$data['localityArray']=$this->Vendor_model->localityData();
+		$this->load->view('admin/Admin_addvendor_view',$data);
 		//$data['page_title'] = 'your page title'; //will be available as $page_title in view
 
 		//$this->load->view('admin/Admin_home');
@@ -48,6 +49,47 @@ class Admincontroller extends CI_Controller {
 
 			
 		}
+
+	}
+
+	public function Add_vendor(){
+		 $this->load->helper('url');
+
+        $email_id=$this->input->post('vemail');
+        $data_login = array( 
+                       'email'       => $email_id,
+                       'password'    => password_hash($this->input->post('vpassword'),PASSWORD_DEFAULT),
+                       'type'     => 'vendor',
+
+                        );
+        print_r($data_login);
+        $data_vendor = array( 
+                       'firstname'   => $this->input->post('vfname'),
+                       'lastname'    => $this->input->post('vsname'),
+                       'contact'     => $this->input->post('vnumber'),
+                       'address'     => $this->input->post('vaddress'),
+                       'latitude'    => $this->input->post('vlatitude'),
+                       'longitude'   => $this->input->post('vlongitude'),
+                       'id_locality' => $this->input->post('vlocality'),
+                        );  
+         $this->load->model('Vendor_model');
+         $array=$this->Vendor_model->Create_vendor($data_login,$data_vendor);
+         
+         $data_vendor=$this->array_push_assoc($data_vendor, 'flag', $array['flag']);
+         $flag=$array['flag'];
+         if($flag==true)
+         {
+           $vendor_array = $this->array_push_assoc($data_vendor, 'id', $array['id']);
+           $vendor_array = $this->array_push_assoc($vendor_array, 'email_id', $email_id);
+           $myJSON=json_encode($dist_array);
+           echo $myJSON;
+         }
+         else{
+            //$trans_message=$array['message'];
+            //echo $trans_message;
+            $myJSON=json_encode($data_vendor);
+            echo $myJSON;
+         }
 
 	}
 
@@ -373,7 +415,8 @@ public function Change_name(){
 
 		$this->load->model('Vendor_model');
 		$data['userArray']=$this->Vendor_model->return_vendors();
-		$this->load->view('admin/admin_addvendor_view',$data);
+		$data['localityArray']=$this->Vendor_model->localityData();
+		$this->load->view('admin/Admin_addvendor_view',$data);
 
 	}
 }

@@ -22,14 +22,22 @@
 }
 
 .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
-    background-color: #5E5A56;
+    background-color: #42403d;
 }
 
 .skin-blue .sidebar-menu>li.header {
     color: #fff;
-    background: #757575;
+    background: #282625;
 }
 
+.skin-blue .sidebar-menu > li:hover > a,
+.skin-blue .sidebar-menu > li.active > a,
+.skin-blue .sidebar-menu > li.menu-open > a {
+  color: #ffffff;
+  background: #353231;
+}
+.skin-blue .sidebar-menu>li>.treeview-menu{margin:0 1px;background:#504a49}
+/*
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
@@ -78,14 +86,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
     min-height: 100% !important;
 }
 
-#tablebrand{
-  align-content: center;
-}
-
 
 #addbtn{
   text-align: center;
-}
+}*/
 
 
 
+
+
+
+.skin-blue .sidebar-menu>li.active>a{border-left-color:#FBEC65}

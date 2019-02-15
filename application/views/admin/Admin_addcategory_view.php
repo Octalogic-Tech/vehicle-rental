@@ -28,7 +28,10 @@
           <small>Control panel</small>
         </h1>
                     </section>
+
                     <section class="content">
+
+
 
                         <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Category</button>
                         <br><br>
@@ -85,10 +88,16 @@
 
                             </div>
                         </div>
+                            <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              
+            </div>
   
             <div class="box-body">
 
-                        <table id="tablebrand" class="table table-hover">
+                        <table id="tablebrand" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
@@ -125,6 +134,7 @@
                         </table>
                 </div>
             <!-- /.box-body -->
+        </div></div></div>
 
                     </section>
                 </div>
@@ -133,8 +143,7 @@
 
     </div>
     <?php $this->view('admin/Admin_script'); ?>
-</body>
-<script type="text/javascript">
+    <script type="text/javascript">
     function Deletebrand(id) {
         $.ajax({
             method: 'POST',
@@ -209,6 +218,13 @@
     }
 
     $(document).ready(function() {
+
+
+     if(location.pathname=="/vehicle-rental/Display_vehiclecategory")
+    {
+      $("#l12").addClass("active");
+      $("#l1").addClass("active");
+    }
 
         var table1 = $('#tablebrand').DataTable({
         
@@ -292,5 +308,7 @@
 
     });
 </script>
+</body>
+
 
 </html>

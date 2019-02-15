@@ -10,6 +10,59 @@
 			return $query->result();
 		}
 
+
+	function localityData(){
+			 $this->load->database();
+			 $this->db->select('*');
+			 $this->db->from('localities');
+			 $this->db->where('status',1);
+			 $locality=$this->db->get();
+
+			 return $locality->result();
+		}
+
+
+	function Create_vendor($data_login,$data_vendor){
+        var_dump($data_login);
+		$this->load->database();
+		$this->db->trans_start();
+
+		$this->db->insert("login",$data_login);
+		$id_login = $this->db->insert_id();
+		$array = $this->array_push_assoc($data_vendor, 'id_login', $id_login);
+		$this->db->insert("vendors",$array);
+		$id = $this->db->insert_id();
+
+		$this->db->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+       		 $error = $this->db->error();
+       		  $arr = array(
+                "flag" => false,
+                "message" => "Vendor Add was Unsuccessful"
+            );
+       		  return $arr;
+		}
+
+		else
+		{
+			$arr = array(
+                "flag" => true,
+                "id" => $id
+            );
+            return $arr;
+		}
+
+
+
+	}
+
+	 function array_push_assoc($array, $key, $value){
+
+         $array[$key] = $value;
+         return $array;
+  	 }
+
 		function update_status($id){
 
 			$this->load->database();
@@ -45,9 +98,10 @@
 			return $query->row_array();
 
 
-
-
 		}
+
+
+		/********************************************BRAND****************************************/
 
 	function insert_branddata($data){
 		$this->load->database();

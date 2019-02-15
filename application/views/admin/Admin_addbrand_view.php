@@ -85,10 +85,19 @@
 
                             </div>
                         </div>
+                        
+
+     <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              
+            </div>
+
   
             <div class="box-body">
 
-                        <table id="tablebrand" class="table table-hover">
+                        <table id="tablebrand" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
@@ -126,6 +135,8 @@
                 </div>
             <!-- /.box-body -->
 
+        </div></div></div>
+
                     </section>
                 </div>
                 <?php $this->view('admin/Admin_footer'); ?>
@@ -133,8 +144,7 @@
 
     </div>
     <?php $this->view('admin/Admin_script'); ?>
-</body>
-<script type="text/javascript">
+    <script type="text/javascript">
     function Deletebrand(id) {
         $.ajax({
             method: 'POST',
@@ -212,6 +222,13 @@ var table = $('#tablebrand').DataTable();
 
     $(document).ready(function() {
 
+     if(location.pathname=="/vehicle-rental/Display_vehiclebrand")
+    {
+      $("#l11").addClass("active");
+      $("#l1").addClass("active");
+    }
+
+
         var table1 = $('#tablebrand').DataTable({
         
         responsive: true
@@ -242,6 +259,7 @@ var table = $('#tablebrand').DataTable();
 
                     var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="Deletebrand(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
+                    
 
                     var row= table1.row.add([idid, idname, deletebtn, updatebtn]).draw().node();
                      $(row).attr("id", "t"+obj.id);
@@ -288,5 +306,7 @@ var table = $('#tablebrand').DataTable();
 
     });
 </script>
+</body>
+
 
 </html>

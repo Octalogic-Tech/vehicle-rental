@@ -14,10 +14,12 @@
         <title>Admin Add Brand</title>
 
 
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
+       
         <?php $this->view('admin/Admin_header'); ?>
             <?php $this->view('admin/Admin_sidebar'); ?>
                 <div class="content-wrapper">
@@ -27,11 +29,14 @@
           Locality Details
           <small>Control panel</small>
         </h1>
-                    </section>
-                    <section class="content">
-
-                        <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Locality</button>
+    </section>
+        <section class="content">
+         <button id="addbtn" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="Launch_insertmodal()">Add Locality</button>
                         <br><br>
+                  
+
+
+                       
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
@@ -85,10 +90,17 @@
 
                             </div>
                         </div>
+
+     <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              
+            </div>
   
             <div class="box-body">
 
-                        <table id="tablebrand" class="table table-hover">
+                        <table id="tablebrand" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th id="id">ID</th>
@@ -125,16 +137,24 @@
                         </table>
                 </div>
             <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
 
                     </section>
                 </div>
+
                 <?php $this->view('admin/Admin_footer'); ?>
                     <div class="control-sidebar-bg"></div>
 
     </div>
     <?php $this->view('admin/Admin_script'); ?>
-</body>
-<script type="text/javascript">
+    <script type="text/javascript">
+
+             $(function () {
+  
+    })
     function Deletebrand(id) {
         $.ajax({
             method: 'POST',
@@ -183,12 +203,15 @@ var table = $('#tablebrand').DataTable();
         return false; // Keep close.bs.alert event from removing from DOM
     }
 
+
     $(document).ready(function() {
 
-        var table1 = $('#tablebrand').DataTable({
+    if(location.pathname=="/vehicle-rental/Display_locality")
+    {
+      $("#l2").addClass("active");
+    }
+ var table=$('#tablebrand').DataTable()
         
-        responsive: true
-    });
           
  
 
@@ -222,7 +245,7 @@ var table = $('#tablebrand').DataTable();
                     var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="Deletebrand(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
 
-                    var row= table1.row.add([idid, idname, deletebtn, updatebtn]).draw().node();
+                    var row= table.row.add([idid, idname, deletebtn, updatebtn]).draw().node();
                      $(row).attr("id", "t"+obj.id);
                   
                       $(row).find('td').eq(0).attr('id', "id"+obj.id);
@@ -267,5 +290,7 @@ var table = $('#tablebrand').DataTable();
 
     });
 </script>
+</body>
+
 
 </html>
