@@ -6,7 +6,13 @@
 		function return_vendors(){
 			$this->load->database();
 			//$query=$this->db->query("SELECT * from vendors");
-			$query=$this->db->get("vendors");
+
+			$this->db->select("v.id as id, v.id_login as id_login, v.firstname as firstname,v.lastname as lastname, v.contact as contact, v.address as address, v.id_locality as id_locality, v.latitude as latitude, v.longitude as longitude, v.activeStatus as activeStatus, l.place as locality_name, lo.email as email_id ");
+			$this->db->from("vendors v");
+			$this->db->join("localities l","l.id=v.id_locality","LEFT");
+			$this->db->join("login lo","lo.id=v.id_login","LEFT");
+			$this->db->where("v.activeStatus",1);
+			$query=$this->db->get();
 			return $query->result();
 		}
 
@@ -23,7 +29,7 @@
 
 
 	function Create_vendor($data_login,$data_vendor){
-        var_dump($data_login);
+        //var_dump($data_login);
 		$this->load->database();
 		$this->db->trans_start();
 
@@ -55,6 +61,15 @@
 
 
 
+	}
+
+	function get_localityname($locality_id){
+		$this->load->database();
+		$this->db->select("place");
+		$this->db->where('id', $locality_id);
+		$this->db->from('localities');
+		$query=$this->db->get();
+		return $query->row_array();
 	}
 
 	 function array_push_assoc($array, $key, $value){

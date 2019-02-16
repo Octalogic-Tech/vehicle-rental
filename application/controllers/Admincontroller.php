@@ -56,13 +56,14 @@ class Admincontroller extends CI_Controller {
 		 $this->load->helper('url');
 
         $email_id=$this->input->post('vemail');
+        $locality_id=$this->input->post('vlocality');
         $data_login = array( 
                        'email'       => $email_id,
                        'password'    => password_hash($this->input->post('vpassword'),PASSWORD_DEFAULT),
                        'type'     => 'vendor',
 
                         );
-        print_r($data_login);
+
         $data_vendor = array( 
                        'firstname'   => $this->input->post('vfname'),
                        'lastname'    => $this->input->post('vsname'),
@@ -73,15 +74,19 @@ class Admincontroller extends CI_Controller {
                        'id_locality' => $this->input->post('vlocality'),
                         );  
          $this->load->model('Vendor_model');
+         $locality_name=$this->Vendor_model->get_localityname($locality_id);
+         //print_r($locality_name);
          $array=$this->Vendor_model->Create_vendor($data_login,$data_vendor);
          
          $data_vendor=$this->array_push_assoc($data_vendor, 'flag', $array['flag']);
+         $data_vendor=$this->array_push_assoc($data_vendor, 'place', $locality_name['place']);
+         //print_r($data_vendor);
          $flag=$array['flag'];
          if($flag==true)
          {
            $vendor_array = $this->array_push_assoc($data_vendor, 'id', $array['id']);
            $vendor_array = $this->array_push_assoc($vendor_array, 'email_id', $email_id);
-           $myJSON=json_encode($dist_array);
+           $myJSON=json_encode($vendor_array);
            echo $myJSON;
          }
          else{
