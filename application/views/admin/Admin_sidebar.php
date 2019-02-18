@@ -50,7 +50,7 @@
 
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-        <li><a href="#"><i class="  glyphicon glyphicon-off text-red"></i> <span>Log Out</span></a></li>
+        <li><a href="#"><i class="  glyphicon glyphicon-off text-red"></i> <span>LOG OUT</span></a></li>
       </ul>
     </section>
   </aside>

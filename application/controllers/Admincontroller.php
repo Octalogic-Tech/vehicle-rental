@@ -98,6 +98,49 @@ class Admincontroller extends CI_Controller {
 
 	}
 
+
+	function Update_vendor(){
+
+
+		$this->load->helper('url');
+    	$email_id=$this->input->post('vemail1');
+    	$data_login1 = array(
+
+                        'id'  =>  $this->input->post('id'),
+                        'email'     => $this->input->post('vemail1'),
+
+                        );
+
+    	$data_vendor1 = array( 
+                       'id'          => $this->input->post('id'),
+                       'firstname'   => $this->input->post('vfname1'),
+                       'lastname'    => $this->input->post('vsname1'),
+                       'contact'     => $this->input->post('vnumber1'),
+                       'address'     => $this->input->post('vaddress1'),
+                       'latitude'    => $this->input->post('vlatitude1'),
+                       'longitude'   => $this->input->post('vlongitude1'),
+                       'id_locality' => $this->input->post('locid1'),
+                        ); 
+    	$idlocality=$this->input->post('locid1');
+    	 $this->load->model('Vendor_model');
+    	$locality_name=$this->Vendor_model->get_localityname($idlocality);
+    	$array=$this->Vendor_model->Update_vendordetails($data_login1,$data_vendor1);
+    	$array1 = $this->array_push_assoc($array, 'email_id', $email_id);
+    	$array1 = $this->array_push_assoc($array1, 'locality_name', $locality_name['place']);
+    	//echo $data['name'];
+     	$myJSON=json_encode($array1);
+     	echo $myJSON;
+
+	}
+
+ public function Change_Vendorstatus(){
+
+      $id=$this->input->post('id');
+      $this->load->model('Vendor_model');
+      $data=$this->Vendor_model->Vendor_delete($id);
+      print_r($data['status']);
+    }
+
 	public function Launch_add_brand_view(){
 		$this->load->view('admin/Admin_addbrand_view');
 

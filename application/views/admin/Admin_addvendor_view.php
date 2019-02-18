@@ -76,7 +76,7 @@
                   pattern="[0-9]{7,10}" title="Enter Valid Contact Number of 7 or 10 Digit" required>
                 </div>
                 <div class="form-group">
-                  <label>Product</label>
+                  <label>Locality</label>
                   <select class="form-control" id="locality_id" required>
                     <?php 
                     foreach ($localityArray as $value) {
@@ -155,7 +155,7 @@
                   <input id="vendor_fname1" type="text" class="form-control" placeholder="Enter Name" required>
                 </div>
                 <div class="form-group">
-                  <label>Second Name</label>
+                  <label>Last Name</label>
                   <input id="vendor_sname1" type="text" class="form-control" placeholder="Enter Name" required>
                 </div>
                 <div class="form-group">
@@ -168,7 +168,7 @@
                   pattern="[0-9]{7,10}" title="Enter Valid Contact Number of 7 or 10 Digit" required>
                 </div>
                 <div class="form-group">
-                  <label>Product</label>
+                  <label>Loacality</label>
                   <select class="form-control" id="locality_id1" required>
                     <?php 
                     foreach ($localityArray as $value) {
@@ -255,7 +255,7 @@
           <td id="<?php echo "lon";echo $value->id; ?>"><?php echo $value->longitude;?></td>
           <td id="<?php echo "lat";echo $value->id; ?>"><?php echo $value->latitude; ?></td>
           <!--<td><?php //echo $value->activeStatus; ?></td>-->
-          <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-danger">Delete</button></td>
+          <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-danger" onclick="ConfirmDeleteVendor('<?php echo $value->id; ?>')">Delete</button></td>
           <td class="<?php echo $value->id; ?>"><button id="<?php echo $value->id; ?>" type="button" class="btn btn-primary"data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('<?php echo $value->id; ?>')">Update</button></td>
           <!--<td><a href="<?php// echo base_url('/update'); ?>" >Change</a></td>-->
         </tr>  
@@ -285,6 +285,57 @@
  <?php $this->view('admin/Admin_script'); ?>
  <script type="text/javascript">
 
+
+  function ConfirmDeleteVendor(id){
+          var id1=id;
+          swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this Distributor!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            //swal("Poof! Your imaginary file has been deleted!", {
+             // icon: "success",
+            //});
+            swal("Delete Successful!", "Product was Deleted Successfully", {
+              icon: "success",
+            });
+            DeleteVendor(id1);
+          } else {
+            swal("Distributor was not Deleted!");
+          }
+        });
+}
+
+   function DeleteVendor(id) {
+        $.ajax({
+            method: 'POST',
+            data: {
+                id: id
+            },
+            url: "<?php echo base_url('/Change_Vendorstatus'); ?>",
+            success: function(data) {
+                var x = "#t" + id;
+
+                var table = $('#tablevendor').DataTable();
+                table
+                .row( $(x))
+                .remove()
+                .draw();
+                swal("Delete Successful!", "Distributor was Deleted Successfully", "success");
+
+                }
+              });
+
+            }
+
+  function toggleAlert() {
+        $(".alert").toggleClass('in out');
+        return false; // Keep close.bs.alert event from removing from DOM
+    }
 
   function Launch_addmodal(){
         $('#vendor_fname').val(null);
@@ -321,10 +372,9 @@
         var v_locality = $(l).text().replace(/\s+/g,' ').trim();
         var v_lon = $(lon).text().replace(/\s+/g,' ').trim();
         var v_lat = $(lat).text().replace(/\s+/g,' ').trim();
-        alert(v_locality);
+        //alert(v_locality);
 
         $(".modal-body #id").val(id);
-
         $(".modal-body #vendor_fname1").val(v_fname);
         $(".modal-body #vendor_sname1").val(v_lname);
         $(".modal-body #vendor_address1").val(v_address);
@@ -457,7 +507,7 @@
                     var olocality=obj.place;
 
 
-                    var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="ConfirmDeleteDistributor(' + obj.id + ')">Delete</buttton>';
+                    var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="ConfirmDeleteVendor(' + obj.id + ')">Delete</buttton>';
                     var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
 
                     var row= table1.row.add([oid,ofname,olname, ocontact, oemail, oaddress,olocality,olatitude,olongitude, deletebtn, updatebtn]).draw().node();
@@ -491,8 +541,12 @@
 
               $("#updateVendor").submit(function() {
              var id = $('#id').val();
+
+             
              var v_fname1=$("#vendor_fname1").val();
              var v_sname1=$("#vendor_sname1").val();
+             alert(v_fname1);
+              alert(v_sname1);
              var v_address1=$("#vendor_address1").val();
              var v_number1 = $("#vendor_number1").val();
              var v_latitude1  =   $("#vendor_latitude1").val();
@@ -511,29 +565,45 @@
                     'vlatitude1':v_latitude1,
                     'vlongitude1':v_longitude1,
                     'vemail1':v_email1,
-                    'locid1':loc_id1,
+                    'locid1':loc_id1
 
                 },
                 url: "<?php echo base_url('/Update_vendor'); ?>",
                 success: function(data) {
+                  alert(data);
                     var obj = JSON.parse(data);
                     $("#myModal2").modal("toggle");
-                   
-                    var idn = "#n"+obj.id;
-                    var idc = "#c"+obj.id;
-                    var ida = "#a"+obj.id;
-                    var ide = "#e"+obj.id;
-                    var n = obj.name;
-                    var c = obj.contact;
-                    var a = obj.address;
-                    var e = obj.email_id;
-
-                    $(idn).html(n);
-                    $(idc).html(c);
-                    $(ida).html(a);
-                    $(ide).html(e);
+                      alert(obj.firstname);
+                      var i_id="#i"+obj.id;
+                      var fid="#fn"+obj.id;
+                      var sid="#ln"+obj.id;
+                      var cid="#c"+obj.id;
+                      var eid="#e"+obj.id;
+                      var aid="#a"+obj.id;
+                      var lid="#loc"+obj.id;
+                      var lonid="#lon"+obj.id;
+                      var latid="#lat"+obj.id;
+                    var oid=obj.id;
+                    var ofname1=obj.firstname;
+                    var olname1=obj.lastname;
+                    var ocontact1=obj.contact;
+                    var oaddress1=obj.address;
+                    var olatitude1=obj.latitude;
+                    var olongitude1=obj.longitude;
+                    var oemail1=obj.email_id;
+                    var olocality1=obj.locality_name;
+                    $(i_id).html(oid);
+                    $(fid).html(ofname1);
+                    $(sid).html(olname1);
+                    $(cid).html(oaddress1);
+                    $(eid).html(oemail1);
+                    $(aid).html(oaddress1);
+                    $(lid).html(olocality1);
+                    $(lonid).html(olongitude1);
+                    $(latid).html(olatitude1);
                     toggleAlert("Update Successful");
-                    swal("Update Successful!", "Distributor was Update Successfully", "success");
+                    swal("Update Successful!", "Vendor was Update Successfully", "success");
+                    
                     //alert(data);
 
                 }
@@ -541,10 +611,6 @@
 
             return false;
         });
-
-
-
-
 
     });
     </script>
