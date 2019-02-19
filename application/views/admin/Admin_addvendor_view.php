@@ -595,7 +595,7 @@
                     $(i_id).html(oid);
                     $(fid).html(ofname1);
                     $(sid).html(olname1);
-                    $(cid).html(oaddress1);
+                    $(cid).html(ocontact1);
                     $(eid).html(oemail1);
                     $(aid).html(oaddress1);
                     $(lid).html(olocality1);

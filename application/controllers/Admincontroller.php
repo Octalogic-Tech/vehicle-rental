@@ -467,4 +467,61 @@ public function Change_name(){
 		$this->load->view('admin/Admin_addvendor_view',$data);
 
 	}
+
+	function Display_vehiclecolor(){
+		$this->load->model('Vendor_model');
+		$data['userArray']=$this->Vendor_model->get_vehiclecolor();
+		$this->load->view('admin/Admin_addcolor_view',$data);
+
+	}
+	function insert_color(){
+		$this->load->helper('url');
+
+		 $data = array(  
+                       'colorName'     => $this->input->post('colorname'),  
+                        );  
+
+		 $this->load->model('Vendor_model');
+		 $insert_id=$this->Vendor_model->insert_colordata($data);
+
+		 $array = $this->array_push_assoc($data, 'id', $insert_id);
+
+		 $myJSON=json_encode($array);
+		 echo $myJSON;  
+
+	}
+
+	function Change_colorname(){
+
+
+		$this->load->helper('url');
+		//$id= $this->input->post('id');
+	
+		//$name =$this->input->post('brandname');
+		$data = array(
+
+						'id'	=>	$this->input->post('id'),
+                      	'colorName'     => $this->input->post('colorname1'),  
+                        );
+
+
+		$this->load->model('Vendor_model');
+		$array=$this->Vendor_model->Updatecolorname($data);
+		//echo $data['name'];
+		 $myJSON=json_encode($array);
+		 echo $myJSON;
+
+	}
+
+
+	public function Change_colorstatus(){
+			$id=$this->input->post('id');
+			$this->load->model('Vendor_model');
+			$data=$this->Vendor_model->Update_colorstatus($id);
+			//$data['userArray']=$this->Vendor_model->update_status();
+			print_r($data['status']);
+	}
+
+
+
 }

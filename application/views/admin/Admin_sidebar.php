@@ -13,6 +13,12 @@
      
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        <li  id="l5">
+          <a href="<?php echo base_url('/Display_booking'); ?>">
+            <i class="glyphicon glyphicon-user"></i> <span>Booking Details</span>
+            
+          </a>
+        </li>
 
         <li  id="l4">
           <a href="<?php echo base_url('/Display_vendor'); ?>">
@@ -29,7 +35,7 @@
             <span>Add Vehicle Details</span>
             <span class="pull-right-container">
               <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">5</span>
             </span>
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -39,6 +45,7 @@
              <li id="l12"><a href="<?php echo base_url('/Display_vehiclecategory'); ?>"><i class="fa fa-circle-o"></i> Vehicle Categories</a></li>
             <li id="l13"><a href="<?php echo base_url('/Display_vehicletype'); ?>"><i class="fa fa-circle-o"></i> Vehicle Type </a></li>     
             <li id="l14"><a href="<?php echo base_url('/Display_vehiclename'); ?>"><i class="fa fa-circle-o"></i> Vehicle Name</a></li>
+            <li id="l15"><a href="<?php echo base_url('/Display_vehiclecolor'); ?>"><i class="fa fa-circle-o"></i> Vehicle Color</a></li>
           </ul>
         </li>
         <li  id="l2">

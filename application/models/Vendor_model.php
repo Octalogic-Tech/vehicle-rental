@@ -665,6 +665,85 @@
 	}
 
 
+	/*********************Vehicle Colors*********************/
+
+	function get_vehiclecolor(){
+
+			$this->load->database();
+			$query = $this->db->get_where('colors', array('status' => '1'));
+			return $query->result();
+
+
+	}
+
+	function insert_colordata($data){
+
+		$this->load->database();
+		$this->db->insert("colors",$data);
+		$insert_id = $this->db->insert_id();
+
+		return $insert_id;
+
+	}
+
+	function Updatecolorname($data){
+
+		    $this->load->database();
+			$this->db->get("colors");
+			$this->db->where('id', $data['id']);
+			$this->db->set('colorName', $data['colorName']);
+   			$this->db->update('colors');
+
+
+   			$this->db->select("*");
+			$this->db->where('id', $data['id']);
+			$query=$this->db->get("colors");;
+
+			return $query->row_array();
+
+	}
+
+	function Update_colorstatus($id){
+
+
+			$this->load->database();
+
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("colors");
+
+			$data=$query->row_array();
+
+			if($data['status']==0){
+				$this->db->get("colors");
+				$this->db->where('id', $id);
+				$this->db->set('status', 1);
+				$this->db->update('colors');
+			}
+			if($data['status']==1){
+				$this->db->get("colors");
+				$this->db->where('id', $id);
+				$this->db->set('status', 0);
+				$this->db->update('colors');
+			}
+
+
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("colors");
+			
+			//$query->result();		
+			//$query=$this->db->get("vendors");
+			//print_r($query->result());
+
+			return $query->row_array();
+
+
+
+
+	}
+
+
 
 
 }

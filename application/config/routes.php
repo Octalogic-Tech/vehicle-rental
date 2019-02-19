@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['default_controller'] = 'mycontroller';
 $route['default_controller'] = 'Admincontroller/index';
 $route['update'] = 'Admincontroller/update';
+$route['vendor']='vendorcontroller';
 
 
 /*--------------------------------------INSERT------------------------------------------*/
@@ -61,6 +62,8 @@ $route['Insert_category'] = 'Admincontroller/Insert_category';
 $route['Insert_type'] = 'Admincontroller/Insert_type';
 $route['Insert_name'] = 'Admincontroller/Insert_name';
 $route['Insert_locality'] = 'Admincontroller/Insert_locality';
+
+$route['insert_color'] = 'Admincontroller/insert_color';
 $route['Add_vendor'] = 'Admincontroller/Add_vendor';
 
 
@@ -70,8 +73,11 @@ $route['Change_brandname'] = 'Admincontroller/Change_brandname';
 $route['Change_category'] = 'Admincontroller/Change_category';
 $route['Change_type'] = 'Admincontroller/Change_type';
 $route['Change_name'] = 'Admincontroller/Change_name';
+
+$route['Change_colorname'] = 'Admincontroller/Change_colorname';
 $route['Change_locality'] = 'Admincontroller/Change_locality';
 $route['Update_vendor'] = 'Admincontroller/Update_vendor';
+
 
 /*--------------------------------------DELETE------------------------------------------*/
 
@@ -81,15 +87,19 @@ $route['Change_typestatus'] = 'Admincontroller/Change_typestatus';
 $route['Change_namestatus'] = 'Admincontroller/Change_namestatus';
 $route['Change_localitystatus'] = 'Admincontroller/Change_localitystatus';
 $route['Change_Vendorstatus'] = 'Admincontroller/Change_Vendorstatus';
+$route['Change_colorstatus'] = 'Admincontroller/Change_colorstatus';
 /*--------------------------------------DISPLAY------------------------------------------*/
 
 $route['Display_vehiclebrand']= 'Admincontroller/Display_vehiclebrand';
 $route['Display_vehiclecategory']= 'Admincontroller/Display_vehiclecategory';
 $route['Display_vehicletype']= 'Admincontroller/Display_vehicletype';
 $route['Display_vehiclename']= 'Admincontroller/Display_vehiclename';
+$route['Display_vehiclecolor']= 'Admincontroller/Display_vehiclecolor';
 $route['Display_locality']= 'Admincontroller/Display_locality';
-
 $route['Display_vendor']= 'Admincontroller/Display_vendor';
+
+
+
 
 
 $route['form_validation/[:any]']='Admincontroller/form_validation/';
@@ -101,8 +111,17 @@ $route['Change_typestatus/(:num)'] = 'Admincontroller/Change_typestatus/$1';
 $route['Change_namestatus/(:num)'] = 'Admincontroller/Change_namestatus/$1';
 $route['Change_localitystatus/(:num)'] = 'Admincontroller/Change_localitystatus/$1';
 $route['Change_Vendorstatus/(:num)'] = 'Admincontroller/Change_Vendorstatus/$1';
+$route['Change_colorstatus/(:num)'] = 'Admincontroller/Change_colorstatus/$1';
+
 //$route['Change_brandname/(:any)'] = 'Admincontroller/Change_brandname/';
 //$route['insert_brand/(:any)'] = 'Admincontroller/insert_brand/';
 
+$route['Display_vendor_booking']= 'Vendorcontroller/Display_vendor_booking';
+$route['Display_addvehicle']= 'Vendorcontroller/Display_addvehicle';
+$route['Display_accountdetails']= 'Vendorcontroller/Display_accountdetails';
+
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
