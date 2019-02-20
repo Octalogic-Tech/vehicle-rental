@@ -15,21 +15,21 @@
         <li class="header">MAIN NAVIGATION</li>
         <li  id="l1">
           <a href="<?php echo base_url('/Display_vendor_booking'); ?>">
-            <i class="glyphicon glyphicon-user"></i> <span>Your Booking Details</span>
+            <i class="fa fa-files-o"></i> <span>Your Booking Details</span>
             
           </a>
         </li>
 
         <li  id="l2">
           <a href="<?php echo base_url('/Display_addvehicle'); ?>">
-            <i class="glyphicon glyphicon-user"></i> <span>Add Vehicle Details</span>
+            <i class="fa fa-edit"></i> <span>Add Vehicle Details</span>
             
           </a>
         </li>
         
         <li  id="l3">
           <a href="<?php echo base_url('/Display_accountdetails'); ?>">
-            <i class="fa fa-th"></i> <span>Account Details</span>
+            <i class="glyphicon glyphicon-user"></i> <span>Account Details</span>
             
           </a>
         </li>

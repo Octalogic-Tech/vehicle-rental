@@ -120,6 +120,9 @@ $route['Display_vendor_booking']= 'Vendorcontroller/Display_vendor_booking';
 $route['Display_addvehicle']= 'Vendorcontroller/Display_addvehicle';
 $route['Display_accountdetails']= 'Vendorcontroller/Display_accountdetails';
 
+$route['Add_Vehicle']= 'Vendorcontroller/Add_Vehicle';
+
+
 
 
 $route['404_override'] = '';

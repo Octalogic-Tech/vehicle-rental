@@ -20,9 +20,9 @@ class Admincontroller extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->return_vendors();
-		$data['localityArray']=$this->Vendor_model->localityData();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->return_vendors();
+		$data['localityArray']=$this->Admin_model->localityData();
 		$this->load->view('admin/Admin_addvendor_view',$data);
 		//$data['page_title'] = 'your page title'; //will be available as $page_title in view
 
@@ -41,9 +41,9 @@ class Admincontroller extends CI_Controller {
 		}
 		else
 		{
-			$this->load->model('Vendor_model');
-			$data=$this->Vendor_model->update_status($id);
-			//$data['userArray']=$this->Vendor_model->update_status();
+			$this->load->model('Admin_model');
+			$data=$this->Admin_model->update_status($id);
+			//$data['userArray']=$this->Admin_model->update_status();
 			print_r($data['activeStatus']);
 			//$this->load->view('Display_vendor_view',$data);
 
@@ -73,10 +73,10 @@ class Admincontroller extends CI_Controller {
                        'longitude'   => $this->input->post('vlongitude'),
                        'id_locality' => $this->input->post('vlocality'),
                         );  
-         $this->load->model('Vendor_model');
-         $locality_name=$this->Vendor_model->get_localityname($locality_id);
+         $this->load->model('Admin_model');
+         $locality_name=$this->Admin_model->get_localityname($locality_id);
          //print_r($locality_name);
-         $array=$this->Vendor_model->Create_vendor($data_login,$data_vendor);
+         $array=$this->Admin_model->Create_vendor($data_login,$data_vendor);
          
          $data_vendor=$this->array_push_assoc($data_vendor, 'flag', $array['flag']);
          $data_vendor=$this->array_push_assoc($data_vendor, 'place', $locality_name['place']);
@@ -122,9 +122,9 @@ class Admincontroller extends CI_Controller {
                        'id_locality' => $this->input->post('locid1'),
                         ); 
     	$idlocality=$this->input->post('locid1');
-    	 $this->load->model('Vendor_model');
-    	$locality_name=$this->Vendor_model->get_localityname($idlocality);
-    	$array=$this->Vendor_model->Update_vendordetails($data_login1,$data_vendor1);
+    	 $this->load->model('Admin_model');
+    	$locality_name=$this->Admin_model->get_localityname($idlocality);
+    	$array=$this->Admin_model->Update_vendordetails($data_login1,$data_vendor1);
     	$array1 = $this->array_push_assoc($array, 'email_id', $email_id);
     	$array1 = $this->array_push_assoc($array1, 'locality_name', $locality_name['place']);
     	//echo $data['name'];
@@ -136,8 +136,8 @@ class Admincontroller extends CI_Controller {
  public function Change_Vendorstatus(){
 
       $id=$this->input->post('id');
-      $this->load->model('Vendor_model');
-      $data=$this->Vendor_model->Vendor_delete($id);
+      $this->load->model('Admin_model');
+      $data=$this->Admin_model->Vendor_delete($id);
       print_r($data['status']);
     }
 
@@ -162,8 +162,8 @@ class Admincontroller extends CI_Controller {
                        'name'     => $this->input->post('brandname'),  
                         );  
 
-		 $this->load->model('Vendor_model');
-		 $insert_id=$this->Vendor_model->insert_branddata($data);
+		 $this->load->model('Admin_model');
+		 $insert_id=$this->Admin_model->insert_branddata($data);
 
 		 $array = $this->array_push_assoc($data, 'id', $insert_id);
 
@@ -186,11 +186,11 @@ class Admincontroller extends CI_Controller {
 
 		//$this->load->model
 	
-		//$this->load->model(Vendor_model);
+		//$this->load->model(Admin_model);
 	
 	public function Display_vehiclebrand(){
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_vehiclebrands();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_vehiclebrands();
 		$this->load->view('admin/Admin_addbrand_view',$data);
 
 	}
@@ -199,9 +199,9 @@ class Admincontroller extends CI_Controller {
 
 	public function Change_brandstatus(){
 			$id=$this->input->post('id');
-			$this->load->model('Vendor_model');
-			$data=$this->Vendor_model->Update_brandstatus($id);
-			//$data['userArray']=$this->Vendor_model->update_status();
+			$this->load->model('Admin_model');
+			$data=$this->Admin_model->Update_brandstatus($id);
+			//$data['userArray']=$this->Admin_model->update_status();
 			print_r($data['status']);
 	}
 
@@ -219,8 +219,8 @@ class Admincontroller extends CI_Controller {
                         );
 
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Update_brandname($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Update_brandname($data);
 		//echo $data['name'];
 		 $myJSON=json_encode($array);
 		 echo $myJSON;
@@ -231,8 +231,8 @@ class Admincontroller extends CI_Controller {
 /*--------------------------------------Category------------------------------------*/
 
 	public function Display_vehiclecategory(){
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_vehiclecategory();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_vehiclecategory();
 		$this->load->view('admin/Admin_addcategory_view',$data);
 
 	}
@@ -244,8 +244,8 @@ class Admincontroller extends CI_Controller {
 		$data = array(  
                        'name'     => $this->input->post('category'),  
                      );  
-		$this->load->model('Vendor_model');
-		$insert_id=$this->Vendor_model->insert_categorydata($data);
+		$this->load->model('Admin_model');
+		$insert_id=$this->Admin_model->insert_categorydata($data);
 		$array = $this->array_push_assoc($data, 'id', $insert_id);
 		$myJSON=json_encode($array);
 		echo $myJSON;
@@ -261,8 +261,8 @@ class Admincontroller extends CI_Controller {
                       	'name'     => $this->input->post('category'),  
                         );
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Update_category($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Update_category($data);
 		$myJSON=json_encode($array);
 		echo $myJSON;
 
@@ -272,8 +272,8 @@ class Admincontroller extends CI_Controller {
 
 	public function Change_categorystatus(){
 		$id=$this->input->post('id');
-		$this->load->model('Vendor_model');
-		$data=$this->Vendor_model->Update_categorystatus($id);
+		$this->load->model('Admin_model');
+		$data=$this->Admin_model->Update_categorystatus($id);
 		print_r($data['status']);
 	}
 
@@ -282,9 +282,9 @@ class Admincontroller extends CI_Controller {
 	/*--------------------------------------Type------------------------------------*/
 
 	public function Display_vehicletype(){
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_vehicletype();
-		$data['catArray']=$this->Vendor_model->get_activecategory();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_vehicletype();
+		$data['catArray']=$this->Admin_model->get_activecategory();
 		$this->load->view('admin/Admin_addtype_view',$data);
 
 	}
@@ -298,8 +298,8 @@ class Admincontroller extends CI_Controller {
 
 
                      );  
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->insert_typedata($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->insert_typedata($data);
 		//print_r($array);
 		//$array = $this->array_push_assoc($data, 'id', $insert_id);
 		//$myJSON=json_encode($array);
@@ -317,8 +317,8 @@ class Admincontroller extends CI_Controller {
                       	'type'     => $this->input->post('type'),  
                         );
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Update_type($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Update_type($data);
 		$myJSON=json_encode($array);
 		echo $myJSON;
 
@@ -326,8 +326,8 @@ class Admincontroller extends CI_Controller {
 
 	public function Change_typestatus(){
 		$id=$this->input->post('id');
-		$this->load->model('Vendor_model');
-		$data=$this->Vendor_model->Update_typestatus($id);
+		$this->load->model('Admin_model');
+		$data=$this->Admin_model->Update_typestatus($id);
 		print_r($data['status']);
 	}
 
@@ -336,10 +336,10 @@ class Admincontroller extends CI_Controller {
 	/*-------------------------------NAME-----------------------------------*/
 
 	public function Display_vehiclename(){
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_vehiclename();
-		$data['brandArray']=$this->Vendor_model->get_activebrand();
-		$data['typeArray']=$this->Vendor_model->get_activetype();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_vehiclename();
+		$data['brandArray']=$this->Admin_model->get_activebrand();
+		$data['typeArray']=$this->Admin_model->get_activetype();
 
 		$this->load->view('admin/Admin_addname_view',$data);
 
@@ -347,8 +347,8 @@ class Admincontroller extends CI_Controller {
 
 	public function Change_namestatus(){
 		$id=$this->input->post('id');
-		$this->load->model('Vendor_model');
-		$data=$this->Vendor_model->Update_namestatus($id);
+		$this->load->model('Admin_model');
+		$data=$this->Admin_model->Update_namestatus($id);
 		print_r($data['status']);
 	}
 
@@ -365,8 +365,8 @@ class Admincontroller extends CI_Controller {
                       	'name'     => $this->input->post('name'),
 
                      );  
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->insert_namedata($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->insert_namedata($data);
 	
 		$myJSON=json_encode($array);
 		echo $myJSON;
@@ -385,8 +385,8 @@ public function Change_name(){
                       	'name'     => $this->input->post('name'),  
                         );
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Update_name($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Update_name($data);
 		$myJSON=json_encode($array);
 		echo $myJSON;
 
@@ -398,8 +398,8 @@ public function Change_name(){
 	/*****************************LOCALITY*************************************/
 	function Display_locality(){
 
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_locality();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_locality();
 		$this->load->view('admin/admin_addlocality_view',$data);
 
 	}
@@ -407,9 +407,9 @@ public function Change_name(){
 	function Change_localitystatus(){
 
 		$id=$this->input->post('id');
-		$this->load->model('Vendor_model');
-		$data=$this->Vendor_model->Update_localitystatus($id);
-		//$data['userArray']=$this->Vendor_model->update_status();
+		$this->load->model('Admin_model');
+		$data=$this->Admin_model->Update_localitystatus($id);
+		//$data['userArray']=$this->Admin_model->update_status();
 		print_r($data['status']);
 	}
 
@@ -430,8 +430,8 @@ public function Change_name(){
                         );
 
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Update_locality($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Update_locality($data);
 		//echo $data['name'];
 		 $myJSON=json_encode($array);
 		 echo $myJSON;
@@ -445,8 +445,8 @@ public function Change_name(){
                        'place'     => $this->input->post('locality_place'),  
                         );  
 
-		 $this->load->model('Vendor_model');
-		 $insert_id=$this->Vendor_model->insert_localitydata($data);
+		 $this->load->model('Admin_model');
+		 $insert_id=$this->Admin_model->insert_localitydata($data);
 
 		 $array = $this->array_push_assoc($data, 'id', $insert_id);
 
@@ -461,16 +461,16 @@ public function Change_name(){
 
 	function Display_vendor(){
 
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->return_vendors();
-		$data['localityArray']=$this->Vendor_model->localityData();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->return_vendors();
+		$data['localityArray']=$this->Admin_model->localityData();
 		$this->load->view('admin/Admin_addvendor_view',$data);
 
 	}
 
 	function Display_vehiclecolor(){
-		$this->load->model('Vendor_model');
-		$data['userArray']=$this->Vendor_model->get_vehiclecolor();
+		$this->load->model('Admin_model');
+		$data['userArray']=$this->Admin_model->get_vehiclecolor();
 		$this->load->view('admin/Admin_addcolor_view',$data);
 
 	}
@@ -481,8 +481,8 @@ public function Change_name(){
                        'colorName'     => $this->input->post('colorname'),  
                         );  
 
-		 $this->load->model('Vendor_model');
-		 $insert_id=$this->Vendor_model->insert_colordata($data);
+		 $this->load->model('Admin_model');
+		 $insert_id=$this->Admin_model->insert_colordata($data);
 
 		 $array = $this->array_push_assoc($data, 'id', $insert_id);
 
@@ -505,8 +505,8 @@ public function Change_name(){
                         );
 
 
-		$this->load->model('Vendor_model');
-		$array=$this->Vendor_model->Updatecolorname($data);
+		$this->load->model('Admin_model');
+		$array=$this->Admin_model->Updatecolorname($data);
 		//echo $data['name'];
 		 $myJSON=json_encode($array);
 		 echo $myJSON;
@@ -516,9 +516,9 @@ public function Change_name(){
 
 	public function Change_colorstatus(){
 			$id=$this->input->post('id');
-			$this->load->model('Vendor_model');
-			$data=$this->Vendor_model->Update_colorstatus($id);
-			//$data['userArray']=$this->Vendor_model->update_status();
+			$this->load->model('Admin_model');
+			$data=$this->Admin_model->Update_colorstatus($id);
+			//$data['userArray']=$this->Admin_model->update_status();
 			print_r($data['status']);
 	}
 

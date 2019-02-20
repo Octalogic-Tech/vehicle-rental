@@ -408,7 +408,7 @@
     }
 
     var table1 = $('#tablevendor').DataTable({
-        
+        "scrollX": true,
         responsive: true
     });
 
