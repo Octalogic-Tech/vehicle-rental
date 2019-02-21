@@ -20,7 +20,7 @@ class Vendorcontroller extends CI_Controller {
 		
 		$data['nameArray']=$this->Vendor_model->vehiclenameData();
 		$data['colorArray']=$this->Vendor_model->colorData();
-    	$data['vehicleArray']=$this->Vendor_model->get_vehicleData();
+    $data['vehicleArray']=$this->Vendor_model->get_vehicleData();
 		$this->load->view('vendor/Vendor_addvehicle_view',$data);
 	}
 
@@ -64,15 +64,16 @@ class Vendorcontroller extends CI_Controller {
           $this->load->model('Vendor_model');
           $array=$this->Vendor_model->Create_vehicle($data_vehicle,$data_image);
 
-          echo "Hey";
-
-         /*$data_vehicle=$this->array_push_assoc($data_vehicle, 'flag', $array['flag']);
+          
+          
+         $data_vehicle=$this->array_push_assoc($data_vehicle, 'flag', $array['flag']);
          $flag=$array['flag'];
          if($flag==true)
          {
-           $vehicle_array = $this->array_push_assoc($data_vehicle, 'id', $array['id']);
-           $vehicle_array = $this->array_push_assoc($vehicle_array, 'image', $path_image);
-           $myJSON=json_encode($vehicle_array);
+           $vehicle_details=$this->Vendor_model->get_recentVehicleDetails($array['id']);
+           $vehicle_details=$this->array_push_assoc($vehicle_details, 'flag', $array['flag']);
+          // print_r($vehicle_details);
+           $myJSON=json_encode($vehicle_details);
            echo $myJSON;
          }
          else{
@@ -80,13 +81,29 @@ class Vendorcontroller extends CI_Controller {
             //echo $trans_message;
             $myJSON=json_encode($data_vehicle);
             echo $myJSON;
-         }*/
+         }
 
 
 
         }
       }
 	}
+
+  function Update_vehicle(){
+
+         $data_vehicle1 = array( 
+                       'id'              => $this->input->post('id'),
+                       'id_vehicleNames' => $this->input->post('nameid1'),
+                       'ratePerDay'      => $this->input->post('rate1'),
+                       'id_colors'       => $this->input->post('colorid1'),
+                        );
+          $this->load->model('Vendor_model');
+          $array=$this->Vendor_model->vehicle_updatedetails($data_vehicle1);
+
+          $myJSON=json_encode($array);
+          echo $myJSON;  
+
+  }
 
 	function array_push_assoc($array, $key, $value){
          $array[$key] = $value;
@@ -104,5 +121,15 @@ class Vendorcontroller extends CI_Controller {
 
 		//$this->load->view('vendor/Vendor_accountdetails_view');
 	}
+
+
+  public function Change_Vehiclestatus(){
+
+      $id=$this->input->post('id');
+      $this->load->model('Vendor_model');
+      $data=$this->Vendor_model->Vehicle_delete($id);
+      print_r($data['status']);
+
+  }
 
 }

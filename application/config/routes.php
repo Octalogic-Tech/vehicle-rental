@@ -122,6 +122,12 @@ $route['Display_accountdetails']= 'Vendorcontroller/Display_accountdetails';
 
 $route['Add_Vehicle']= 'Vendorcontroller/Add_Vehicle';
 
+$route['Update_vehicle']= 'Vendorcontroller/Update_vehicle';
+
+$route['Change_Vehiclestatus'] = 'Vendorcontroller/Change_Vehiclestatus';
+
+$route['Change_Vehiclestatus/(:num)'] = 'Vendorcontroller/Change_Vehiclestatus/$1';
+
 
 
 

@@ -161,7 +161,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button id="addBtn" type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-primary">Update</button>
               </div>
             </form>
           </div>
@@ -226,7 +226,7 @@
 
 
                                         <td class="<?php echo $value->vehicle_id; ?>">
-                                            <button id="<?php echo $value->vehicle_id; ?>" type="button" class="btn btn-danger" onclick="DeleteProduct('<?php echo $value->vehicle_id; ?>')">Delete</button>
+                                            <button id="<?php echo $value->vehicle_id; ?>" type="button" class="btn btn-danger" onclick="DeleteVehicle('<?php echo $value->vehicle_id; ?>')">Delete</button>
                                         </td>
 
                                         <td class="<?php echo $value->vehicle_id; ?>">
@@ -251,6 +251,54 @@
     <?php $this->view('admin/Admin_script'); ?>
     <script src="public/lightbox/lightbox.js"></script>
     <script type="text/javascript">
+
+        function DeleteVehicle(id){
+          var id1=id;
+          swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this Product!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            //swal("Poof! Your imaginary file has been deleted!", {
+             // icon: "success",
+            //});
+            swal("Delete Successful!", "Product was Deleted Successfully", {
+              icon: "success",
+            });
+            AjaxDelete(id1);
+          } else {
+            swal("Product was not Deleted!");
+          }
+        });
+}
+
+  function AjaxDelete(id) {
+        $.ajax({
+            method: 'POST',
+            data: {
+                id: id
+            },
+            url: "<?php echo base_url('/Change_Vehiclestatus'); ?>",
+            success: function(data) {
+                var x = "#t" + id;
+                // $(x).prev().html (data);
+
+
+                var table = $('#tablevehicle').DataTable();
+                table
+                .row( $(x))
+                .remove()
+                .draw();
+                swal("Delete Successful!", "Product was Deleted Successfully", "success");
+
+                }
+              });
+
+    }
 
     function Launch_insertmodal(){
 
@@ -305,7 +353,6 @@
     $(document).ready(function() {
 
 
-
         if(location.pathname=="/vehicle-rental/Display_addvehicle")
         {
             $("#l2").addClass("active");
@@ -337,41 +384,82 @@
 
             $("#myModal").modal("toggle");
 
-                    /*var obj = JSON.parse(data);
+                    var obj = JSON.parse(data);
                     if(obj.flag==true){
 
                     //alert("Success");
                     //alert("Distributor Name: " + obj.id + ". Added Successfully");
-                   swal("Success!", "Distributor "+obj.name+" was Successfully Added!", "success");
+                   swal("Success!", "Vehicle "+obj.vehicle_name+" was Successfully Added!", "success");
                    
 
-                    
-                    var oname=obj.name;
-                    var odescription=obj.description;
+                    var oid=obj.vehicle_id;
+                    var oname=obj.vehicle_name;
+                    var ocolor=obj.colorName;
                     var oimage='<a class="example-image-link" href="'+obj.image+'" data-lightbox="example-1"><i class="glyphicon glyphicon-picture example-image" alt="image-1"></i> </a>';
+                     var orate=obj.rate;
 
 
-                    var deletebtn = '<button id="' + obj.id + '" type="button" class="btn btn-danger" onclick="DeleteProduct(' + obj.id + ')">Delete</buttton>';
-                    var updatebtn ='<button id="'+obj.id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.id+')">Update</buttton>';
+                    var deletebtn = '<button id="' + obj.vehicle_id + '" type="button" class="btn btn-danger" onclick="DeleteVehicle(' + obj.vehicle_id + ')">Delete</buttton>';
+                    var updatebtn ='<button id="'+obj.vehicle_id+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" onclick=" Launch_updatemodal('+obj.vehicle_id+')">Update</buttton>';
 
-                    var row= table1.row.add([oname, odescription,oimage, deletebtn, updatebtn]).draw().node();
-                     $(row).attr("id", "t"+obj.id);
+                    var row= table1.row.add([oid, oname, ocolor,oimage, orate, deletebtn, updatebtn]).draw().node();
+                     $(row).attr("id", "t"+obj.vehicle_id);
                   
-                      $(row).find('td').eq(0).attr('id', "n"+obj.id);
-                      $(row).find('td').eq(1).attr('id', "d"+obj.id);
-                      $(row).find('td').eq(2).attr('id', "i"+obj.id);
-                      $(row).find('td').eq(4).attr('class', +obj.id);
-                      $(row).find('td').eq(5).attr('class', +obj.id);
+                      $(row).find('td').eq(0).attr('id', "id"+obj.vehicle_id);
+                      $(row).find('td').eq(1).attr('id', "vn"+obj.vehicle_id);
+                      $(row).find('td').eq(2).attr('id', "vc"+obj.vehicle_id);
+                      $(row).find('td').eq(3).attr('id', "i"+obj.vehicle_id);
+                      $(row).find('td').eq(4).attr('id', "r"+obj.vehicle_id);
+                      $(row).find('td').eq(5).attr('class', +obj.vehicle_id);
+                      $(row).find('td').eq(6).attr('class', +obj.vehicle_id);
                     }
                     else{
                       swal("Oops!", "Something went wrong. Distributor was not added, Try Again!", "error");
 
                     }    
-                    */  
+                      
                 }
     
                 });
             }
+        });
+
+
+    $("#updateVehicle").submit(function() {
+
+            $.ajax({
+                method: 'POST',
+                data: new FormData(this),
+                     contentType:false,
+                     cache: false,
+                     processData:false,
+                
+                url: "<?php echo base_url('/Update_vehicle'); ?>",
+                success: function(data) {
+                    var obj = JSON.parse(data);
+                    $("#myModal2").modal("toggle");
+                   //alert("Distributor Id: " + obj.id + ". Updated Successfully");
+                   //here id of TD are generated accordingly
+                    var idvn = "#vn"+obj.id;
+                    var idvc = "#vc"+obj.id;
+                    var idr = "#r"+obj.id;
+                    alert(obj.vehicle_name)
+                    var n = obj.vehicle_name;
+                    var c = obj.colorName;
+                    var r = obj.rate;
+                    
+
+                    //values in TD are set updated values
+                    $(idvn).html(n);
+                    $(idvc).html(c);
+                    $(idr).html(r);
+                    swal("Update Successful!", "Product was Updated Successfully", "success");
+                    //toggleAlert("Update Successful");
+
+                }
+            });
+
+            return false;
         });
     });
    

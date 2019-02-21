@@ -20,6 +20,7 @@
 			return $query->result();
 
 		}
+
 		function localityData(){
 			 $this->load->database();
 			 $this->db->select('*');
@@ -70,7 +71,7 @@
        		 $error = $this->db->error();
        		  $arr = array(
                 "flag" => false,
-                "message" => "Distributor Add was Unsuccessful"
+                "message" => "Vehicle Add was Unsuccessful"
             );
        		  return $arr;
 		}
@@ -90,8 +91,6 @@
 
 	function get_vehicleData(){
 
-
-
 		$this->load->database();
 		$this->db->select("v.id as vehicle_id,vn.name as vehicle_name, c.colorName as colorName, v.images AS image ,v.ratePerDay as rate");
 		$this->db->from("vehiclesrent v");
@@ -100,6 +99,97 @@
 		$this->db->where("v.status",1);
 		$query=$this->db->get();
 		return $query->result();
+
+	}
+
+	function get_recentVehicleDetails($id){
+
+		$this->load->database();
+		$this->db->select("v.id as vehicle_id,vn.name as vehicle_name, c.colorName as colorName, v.images AS image ,v.ratePerDay as rate");
+		$this->db->from("vehiclesrent v");
+		$this->db->join("vehiclenames vn","v.id_vehicleNames=vn.id","LEFT");
+		$this->db->join("colors c","v.id_colors=c.id","LEFT");
+		//$this->db->where("v.status",1);
+		$this->db->where("v.id",$id);
+		$query=$this->db->get();
+		return $query->row_array();
+
+	}
+
+
+	function vehicle_updatedetails($data_vehicle1){
+
+
+		$flag=0;
+		$this->load->database();
+		$this->db->select("*");
+		$this->db->where('id',  $data_vehicle1['id']);
+		$query2=$this->db->get("vehiclesrent");
+		$data2=$query2->row_array();
+
+		if(($data2['id_vehicleNames']!=$data_vehicle1['id_vehicleNames'])||($data2['id_colors']!=$data_vehicle1['id_colors'])||($data2['ratePerDay']!=$data_vehicle1['ratePerDay'])){
+			$this->db->get("vehiclesrent");
+			$this->db->where('id', $data_vehicle1['id']);
+			$this->db->set('id_vehicleNames', $data_vehicle1['id_vehicleNames']);
+			$this->db->set('id_colors', $data_vehicle1['id_colors']);
+			$this->db->set('ratePerDay', $data_vehicle1['ratePerDay']);
+   			$this->db->update('vehiclesrent');
+   			$flag=1;
+		}
+			
+		/*if($flag==1){
+			$this->db->get("products");
+			$this->db->where('id', $data_product1['id']);
+			$this->db->set('modifiedOn', $data_product1['modifiedOn']);
+			$this->db->set('modifiedBy', $data_product1['modifiedBy']);
+   			$this->db->update('products');
+
+		}*/
+			$this->db->select("v.id as id,vn.name as vehicle_name, c.colorName as colorName, v.images AS image ,v.ratePerDay as rate");
+			$this->db->from("vehiclesrent v");
+			$this->db->join("vehiclenames vn","v.id_vehicleNames=vn.id","LEFT");
+			$this->db->join("colors c","v.id_colors=c.id","LEFT");
+			//$this->db->where("v.status",1);
+			$this->db->where("v.id",$data_vehicle1['id']);
+			$query=$this->db->get();
+			return $query->row_array();
+
+	}
+
+	function Vehicle_delete($id){
+
+		$this->load->database();
+
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("vehiclesrent");
+
+			$data=$query->row_array();
+
+			/*if($data['status']==0){
+				$this->db->get("distributors");
+				$this->db->where('id', $id);
+				$this->db->set('status', 1);
+				$this->db->update('distributors');
+			}*/
+			if($data['status']==1){
+
+				$this->db->get("vehiclesrent");
+				$this->db->where('id', $id);
+				$this->db->set('status', 0);
+				$this->db->update('vehiclesrent');
+
+
+
+			}
+
+
+			$this->db->select("status");
+			$this->db->where('id', $id);
+			$query=$this->db->get("vehiclesrent");
+			
+
+			return $query->row_array();
 
 	}
 
