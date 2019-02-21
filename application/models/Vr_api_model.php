@@ -3,6 +3,52 @@
 class Vr_api_model extends CI_Model{
 
 
+	function register_customer($array,$info){
+
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('login');
+		$this->db->where('email', $array['email']);
+		$query = $this->db->get();
+
+		if ($query->result_array() != null) {
+			$arr = array(
+                "error" => true,
+                "message" => "This email already exists, Please Login...",
+            );
+            return $arr;
+		}
+		else {
+
+			$this->db->trans_start();
+	        $this->db->insert('login', $array);
+	        $id = $this->db->insert_id();
+	        $info['id_login'] = $id;
+	        $this->db->insert('customers', $info);
+	        $info['email'] = $array['email'];
+	        $info['password'] = $array['password'];
+	        $this->db->trans_complete();
+	        if ($this->db->trans_status()) {
+	            $arr = array(
+	                "error" => false,
+	                "message" => "Registered successfully!..",
+	                "customer" => $info
+	            );
+	            return $arr;
+	        } else {
+	            $error = $this->db->error();
+	            $arr = array(
+	                "error" => true,
+	                "message" => $error
+	            );
+	            return $arr;
+	        }
+
+		}
+
+	}
+
+
 	function return_customer_vehicles_list($limit, $start){
 
 		$this->load->database();
