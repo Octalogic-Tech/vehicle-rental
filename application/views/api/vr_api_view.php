@@ -2,9 +2,7 @@
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-		//......Printing Api Info
-
-		echo($json);
+		echo "This is just a demo presentation";
 
 	
 ?>

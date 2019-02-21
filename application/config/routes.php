@@ -65,6 +65,7 @@ $route['Change_brandstatus/(:num)'] = 'Admincontroller/Change_brandstatus/$1';
 /*............................................. API routes .............................................*/
 $route['api_list/customer/vehicles/list'] = 'Vrapicontroller/customer_vehicles_list';
 $route['api_list/customer/register'] = 'Vrapicontroller/customerRegister';
+$route['api_list/customer/demo'] = 'Vrapicontroller';//temporary
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

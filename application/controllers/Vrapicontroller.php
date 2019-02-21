@@ -5,7 +5,7 @@ class Vrapicontroller extends CI_Controller {
 
 
 	public function index(){
-		
+		$this->load->view('api/vr_api_view');		
 	}
 
 	public function customerRegister(){
@@ -78,8 +78,8 @@ class Vrapicontroller extends CI_Controller {
 
 
 		
-		$data["json"] = json_encode($mod_arr, JSON_PRETTY_PRINT);
+		$json = json_encode($mod_arr, JSON_PRETTY_PRINT);
+		print_r($json);
 
-		$this->load->view('api/vr_api_view',$data);
 	}
 }
